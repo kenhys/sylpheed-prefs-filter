@@ -7,7 +7,7 @@
 #ifndef __PREFS_FILTER_H__
 #define __PREFS_FILTER_H__
 
-#define SYLPF_ID prefs_filter
+#define SYLPF_ID "prefs_filter"
 #define SYLPF_OPTION prefs_filter_option
 
 #define SYLPF_FUNC(arg) prefs_filter ## _ ## arg
