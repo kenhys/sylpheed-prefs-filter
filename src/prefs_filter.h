@@ -7,6 +7,11 @@
 #ifndef __PREFS_FILTER_H__
 #define __PREFS_FILTER_H__
 
+#define SYLPF_ID prefs_filter
+#define SYLPF_OPTION prefs_filter_option
+
+#define SYLPF_FUNC(arg) prefs_filter ## _ ## arg
+
 static void init_done_cb(GObject *obj, gpointer data);
 static void app_exit_cb(GObject *obj, gpointer data);
 
