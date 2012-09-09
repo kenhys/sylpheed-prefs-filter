@@ -35,5 +35,7 @@ static void inc_finished_cb(GObject *obj, gint new_messages);
 
 static void prefs_filter_open_cb(GObject *obj, PrefsAccount *ac);
 static void prefs_filter_edit_open_cb(GObject *obj, PrefsAccount *ac);
+static void prefs_filter_add_msg_cb(GObject *obj, FolderItem *item,
+                                    const gchar *file, guint num);
 
 #endif /* __PREFS_FILTER_H__ */

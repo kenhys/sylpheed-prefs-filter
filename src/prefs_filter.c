@@ -48,6 +48,8 @@ void plugin_load(void)
                             G_CALLBACK(inc_start_cb), NULL);
   syl_plugin_signal_connect("inc-mail-finished",
                             G_CALLBACK(inc_finished_cb), NULL);
+  syl_plugin_signal_connect("add-msg",
+                            G_CALLBACK(prefs_filter_add_msg_cb), NULL);
   syl_plugin_signal_connect("prefs-filter-open",
                             G_CALLBACK(prefs_filter_open_cb), NULL);
   syl_plugin_signal_connect("prefs-filter-edit-open",
@@ -135,6 +137,15 @@ static void prefs_filter_open_cb(GObject *obj, PrefsAccount *ac)
 static void prefs_filter_edit_open_cb(GObject *obj, PrefsAccount *ac)
 {
 #define SYLPF_FUNC_NAME "prefs_filter_edit_open_cb"
+  SYLPF_START_FUNC
+  SYLPF_END_FUNC
+#undef SYLPF_FUNC_NAME
+}
+
+static void prefs_filter_add_msg_cb(GObject *obj, FolderItem *item,
+                                    const gchar *file, guint num)
+{
+#define SYLPF_FUNC_NAME "prefs_filter_add_msg_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
 #undef SYLPF_FUNC_NAME
