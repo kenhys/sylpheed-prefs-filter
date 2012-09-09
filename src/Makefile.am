@@ -11,7 +11,14 @@ prefs_filter_la_SOURCES = prefs_filter.c prefs_filter.h \
 	$(sylpf_srcdir)/sylpf_utility.h
 prefs_filter_la_LDFLAGS = -module -no-undefined -avoid-version
 
-prefs_filter_CFLAGS = $(AM_CFLAGS)
+prefs_filter_CFLAGS = \
+	$(AM_CFLAGS) \
+	$(GTK_CFLAGS)
+
+prefs_filter_LDADD = \
+	$(GTK_LIBS) \
+	$(top_builddir)/src/libsylpheed-plugin-0.la \
+	$(top_builddir)/libsylph/libsylph-0.la
 
 prefs_filter_SOURCES = \
 	prefs_filter.h \
