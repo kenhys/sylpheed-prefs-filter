@@ -12,6 +12,20 @@
 
 #define SYLPF_FUNC(arg) prefs_filter ## _ ## arg
 
+typedef struct  _PrefsFilterOption PrefsFilterOption;
+struct _PrefsFilterOption
+{
+  gchar *rcpath;
+  GKeyFile *rcfile;
+
+  gboolean plugin_enabled;
+
+  GtkWidget *plugin_on;
+  GtkWidget *plugin_off;
+  GtkWidget *plugin_switch;
+  GtkTooltips *plugin_tooltip;
+};
+
 static void init_done_cb(GObject *obj, gpointer data);
 static void app_exit_cb(GObject *obj, gpointer data);
 
