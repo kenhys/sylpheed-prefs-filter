@@ -1,5 +1,5 @@
 /*
- * Sylpheed -- a GTK+ based, lightweight, and fast e-mail client
+ * Preference filter settings plug-in for Sylpheed
  * Copyright (C) 2012 HAYASHI Kentaro <kenhys@gmail.com>
  *
  */
