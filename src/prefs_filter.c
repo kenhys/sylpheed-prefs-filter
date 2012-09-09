@@ -23,6 +23,7 @@ static SylPluginInfo info = {
   "Preference filter settings plug-in for Sylpheed"
 };
 
+PrefsFilterOption SYLPF_OPTION;
 
 void plugin_load(void)
 {
