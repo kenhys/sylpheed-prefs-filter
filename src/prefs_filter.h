@@ -51,5 +51,8 @@ static void prefs_filter_open_cb(GObject *obj, PrefsAccount *ac);
 static void prefs_filter_edit_open_cb(GObject *obj, PrefsAccount *ac);
 static void prefs_filter_add_msg_cb(GObject *obj, FolderItem *item,
                                     const gchar *file, guint num);
+static void prefs_filter_menu_ok_cb(GtkWidget *widget, gpointer data);
+static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data);
+
 
 #endif /* __PREFS_FILTER_H__ */
