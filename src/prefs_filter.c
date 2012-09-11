@@ -17,10 +17,10 @@
 #include "sylpf_utility.h"
 
 static SylPluginInfo info = {
-  "Prefs filter Plugin",
+  PLUGIN_NAME,
   "0.1.0",
   "HAYASHI Kentaro",
-  "Preference filter settings plug-in for Sylpheed"
+  PLUGIN_DESC
 };
 
 PrefsFilterOption SYLPF_OPTION;
