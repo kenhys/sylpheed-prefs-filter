@@ -10,6 +10,9 @@
 #define SYLPF_ID "prefs_filter"
 #define SYLPF_OPTION prefs_filter_option
 
+#define PLUGIN_NAME N_("Prefs filter Plugin")
+#define PLUGIN_DESC N_("Preference filter settings plug-in for Sylpheed")
+
 #define SYLPF_FUNC(arg) prefs_filter ## _ ## arg
 
 typedef struct  _PrefsFilterOption PrefsFilterOption;
