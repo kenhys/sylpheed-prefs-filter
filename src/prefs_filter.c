@@ -45,12 +45,15 @@ void plugin_load(void)
 
   g_signal_connect_after(syl_app_get(), "init-done", G_CALLBACK(init_done_cb),
                          NULL);
+
+  g_signal_connect(syl_app_get(), "add-msg",
+                   G_CALLBACK(prefs_filter_add_msg_cb), NULL);
+
   syl_plugin_signal_connect("inc-mail-start",
                             G_CALLBACK(inc_start_cb), NULL);
   syl_plugin_signal_connect("inc-mail-finished",
                             G_CALLBACK(inc_finished_cb), NULL);
-  syl_plugin_signal_connect("add-msg",
-                            G_CALLBACK(prefs_filter_add_msg_cb), NULL);
+
   syl_plugin_signal_connect("prefs-filter-open",
                             G_CALLBACK(prefs_filter_open_cb), NULL);
   syl_plugin_signal_connect("prefs-filter-edit-open",
