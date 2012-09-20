@@ -64,6 +64,8 @@ static GtkWidget *create_filter_rule_widget(void);
 static GtkWidget *create_filter_to_widget(void);
 static GtkWidget *create_folder_option_widget(void);
 static GtkWidget *create_filter_edit_button_widget(void);
+static GtkWidget *create_filter_manage_button_widget(void);
+
 
 
 #endif /* __PREFS_FILTER_H__ */

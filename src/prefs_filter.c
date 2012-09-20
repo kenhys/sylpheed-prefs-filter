@@ -253,6 +253,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *filter_to_widget;
   GtkWidget *create_folder_widget;
   GtkWidget *filter_editing_button_widget;
+  GtkWidget *filter_manage_button_widget;
   GtkWidget *filter_exec;
   GtkWidget *filter_save;
   GtkWidget *filter_save_folder;
@@ -290,15 +291,8 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   edit_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Edit filter rule"));
   gtk_box_pack_start(GTK_BOX(page), edit_frame, FALSE, FALSE, 0);
   
-  hbox = gtk_hbox_new(FALSE, 0);
-  /* test current filter rule in inbox folder. */
-  filter_check = gtk_button_new_from_stock(GTK_STOCK_FIND);
-  /* execute current filter rule in inbox folder. */
-  filter_exec = gtk_button_new_from_stock(GTK_STOCK_EXECUTE);
-  gtk_box_pack_end(GTK_BOX(hbox), filter_exec,
-                   FALSE, FALSE, 0);
-  gtk_box_pack_end(GTK_BOX(hbox), filter_check,
-                   FALSE, FALSE, 0);
+  filter_manage_button_widget = \
+    create_filter_manage_button_widget();
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
   
   manage_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Manage filter rule"));
@@ -388,10 +382,33 @@ static GtkWidget *create_filter_edit_button_widget(void)
   save = gtk_button_new_from_stock(GTK_STOCK_SAVE);
   find = gtk_button_new_from_stock(GTK_STOCK_FIND);
   gtk_box_pack_end(GTK_BOX(hbox), save, FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), find, FALSE, FALSE, 0);
+  gtk_box_pack_end(GTK_BOX(hbox), find, FALSE, FALSE, 0);
 
   return hbox;
 }
+
+static GtkWidget *create_filter_manage_button_widget(void)
+{
+  GtkWidget *hbox;
+  GtkWidget *find;
+  GtkWidget *edit;
+  GtkWidget *delete;
+  GtkWidget *exec;
+
+  hbox = gtk_hbox_new(FALSE, 0);
+  find = gtk_button_new_from_stock(GTK_STOCK_FIND);
+  edit = gtk_button_new_from_stock(GTK_STOCK_EDIT);
+  delete = gtk_button_new_from_stock(GTK_STOCK_DELETE);
+  exec = gtk_button_new_from_stock(GTK_STOCK_EXECUTE);
+
+  gtk_box_pack_end(GTK_BOX(hbox), exec, FALSE, FALSE, 0);
+  gtk_box_pack_end(GTK_BOX(hbox), delete, FALSE, FALSE, 0);
+  gtk_box_pack_end(GTK_BOX(hbox), edit, FALSE, FALSE, 0);
+  gtk_box_pack_end(GTK_BOX(hbox), find, FALSE, FALSE, 0);
+
+  return hbox;
+}
+
 
 static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey)
 {
