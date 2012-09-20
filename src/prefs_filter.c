@@ -112,7 +112,6 @@ static void prefs_filter_menu_cb(void)
 
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_container_set_border_width(GTK_CONTAINER(window), 8);
-  gtk_widget_set_size_request(window, 400, 300);
   gtk_window_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
   gtk_window_set_modal(GTK_WINDOW(window), TRUE);
   gtk_window_set_policy(GTK_WINDOW(window), FALSE, TRUE, FALSE);
