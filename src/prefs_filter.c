@@ -297,7 +297,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
                    FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
   
-  rule_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Fiter rule"));
+  rule_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Edit filter rule"));
   
   label = gtk_label_new(_("General"));
   gtk_notebook_append_page(GTK_NOTEBOOK(notebook), rule_frame, label);
