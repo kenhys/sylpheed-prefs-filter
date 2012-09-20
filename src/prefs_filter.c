@@ -100,7 +100,67 @@ static void app_exit_cb(GObject *obj, gpointer data)
 static void prefs_filter_menu_cb(void)
 {
 #define SYLPF_FUNC_NAME "prefs_filter_menu_cb"
+
+  /* show modal dialog */
+  GtkWidget *window;
+  GtkWidget *vbox;
+  GtkWidget *confirm_area;
+  GtkWidget *ok_btn;
+  GtkWidget *cancel_btn;
+    
   SYLPF_START_FUNC
+
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_container_set_border_width(GTK_CONTAINER(window), 8);
+  gtk_widget_set_size_request(window, 400, 300);
+  gtk_window_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+  gtk_window_set_modal(GTK_WINDOW(window), TRUE);
+  gtk_window_set_policy(GTK_WINDOW(window), FALSE, TRUE, FALSE);
+  gtk_widget_realize(window);
+
+  vbox = gtk_vbox_new(FALSE, 6);
+  gtk_widget_show(vbox);
+  gtk_container_add(GTK_CONTAINER(window), vbox);
+
+  /* notebook */
+  GtkWidget *notebook = gtk_notebook_new();
+  /* main tab */
+  create_config_main_page(notebook, SYLPF_OPTION.rcfile);
+  /* about, copyright tab */
+  create_config_about_page(notebook, SYLPF_OPTION.rcfile);
+
+  gtk_widget_show(notebook);
+  gtk_box_pack_start(GTK_BOX(vbox), notebook, TRUE, TRUE, 0);
+
+  confirm_area = gtk_hbutton_box_new();
+  gtk_button_box_set_layout(GTK_BUTTON_BOX(confirm_area), GTK_BUTTONBOX_END);
+  gtk_box_set_spacing(GTK_BOX(confirm_area), 6);
+
+
+  ok_btn = gtk_button_new_from_stock(GTK_STOCK_OK);
+  GTK_WIDGET_SET_FLAGS(ok_btn, GTK_CAN_DEFAULT);
+  gtk_box_pack_start(GTK_BOX(confirm_area), ok_btn, FALSE, FALSE, 0);
+  gtk_widget_show(ok_btn);
+
+  cancel_btn = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
+  GTK_WIDGET_SET_FLAGS(cancel_btn, GTK_CAN_DEFAULT);
+  gtk_box_pack_start(GTK_BOX(confirm_area), cancel_btn, FALSE, FALSE, 0);
+  gtk_widget_show(cancel_btn);
+
+  gtk_widget_show(confirm_area);
+
+  gtk_box_pack_end(GTK_BOX(vbox), confirm_area, FALSE, FALSE, 0);
+  gtk_widget_grab_default(ok_btn);
+
+  gtk_window_set_title(GTK_WINDOW(window),
+                       _("Prefs filter Settings [prefs_filter]"));
+
+  g_signal_connect(G_OBJECT(ok_btn), "clicked",
+                   G_CALLBACK(prefs_filter_menu_ok_cb), window);
+  g_signal_connect(G_OBJECT(cancel_btn), "clicked",
+                   G_CALLBACK(prefs_filter_menu_cancel_cb), window);
+  gtk_widget_show(window);
+
   SYLPF_END_FUNC
 #undef SYLPF_FUNC_NAME
 }
