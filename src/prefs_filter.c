@@ -256,11 +256,14 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *filter_exec;
   GtkWidget *filter_save;
   GtkWidget *filter_save_folder;
-  GtkWidget *rule_frame;
+  GtkWidget *edit_frame;
+  GtkWidget *manage_frame;
+  GtkWidget *page;
 
   SYLPF_START_FUNC
 
   vbox = gtk_vbox_new(FALSE, 0);
+  page = gtk_vbox_new(FALSE, 0);
 
   /* manage filter rule Note: prepare edit,delete and list view */
 
@@ -284,6 +287,8 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
     create_filter_edit_button_widget();
   gtk_box_pack_start(GTK_BOX(vbox), filter_editing_button_widget, FALSE, FALSE, 0);
 
+  edit_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Edit filter rule"));
+  
   hbox = gtk_hbox_new(FALSE, 0);
   /* test current filter rule in inbox folder. */
   filter_check = gtk_button_new_from_stock(GTK_STOCK_FIND);
@@ -294,8 +299,6 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_box_pack_end(GTK_BOX(hbox), filter_check,
                    FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
-  
-  rule_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Edit filter rule"));
   
   label = gtk_label_new(_("General"));
   gtk_notebook_append_page(GTK_NOTEBOOK(notebook), rule_frame, label);
