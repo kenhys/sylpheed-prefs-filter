@@ -59,5 +59,6 @@ static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data);
 
 static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey);
 static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey);
+static GtkWidget *create_filter_name_widget(void);
 
 #endif /* __PREFS_FILTER_H__ */
