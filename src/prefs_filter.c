@@ -251,8 +251,8 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *filter_name_widget;
   GtkWidget *filter_rule_widget;
   GtkWidget *filter_to_widget;
-  GtkWidget *filter_test;
-  GtkWidget *filter_check;
+  GtkWidget *create_folder_widget;
+  GtkWidget *filter_editing_button_widget;
   GtkWidget *filter_exec;
   GtkWidget *filter_save;
   GtkWidget *filter_save_folder;
@@ -277,14 +277,12 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_box_pack_start(GTK_BOX(vbox), filter_to_widget, FALSE, FALSE, 0);
 
   /* Note: add save button and here. */
-  create_folder_option_widget();
+  create_folder_widget = create_folder_option_widget();
+  gtk_box_pack_start(GTK_BOX(vbox), create_folder_widget, FALSE, FALSE, 0);
 
-  filter_save = gtk_button_new_from_stock(GTK_STOCK_SAVE);
-  gtk_box_pack_start(GTK_BOX(hbox), SYLPF_OPTION.create_folder, 
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_save, 
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+  filter_editing_button_widget = \
+    create_filter_edit_button_widget();
+  gtk_box_pack_start(GTK_BOX(vbox), filter_editing_button_widget, FALSE, FALSE, 0);
 
   hbox = gtk_hbox_new(FALSE, 0);
   /* test current filter rule in inbox folder. */
@@ -369,6 +367,21 @@ static GtkWidget *create_folder_option_widget(void)
   SYLPF_OPTION.create_folder = \
     gtk_check_button_new_with_label(_("Create filtering folder automatically"));
   gtk_box_pack_start(GTK_BOX(hbox), SYLPF_OPTION.create_folder, FALSE, FALSE, 0);
+
+  return hbox;
+}
+
+static GtkWidget *create_filter_edit_button_widget(void)
+{
+  GtkWidget *hbox;
+  GtkWidget *find;
+  GtkWidget *save;
+
+  hbox = gtk_hbox_new(FALSE, 0);
+  save = gtk_button_new_from_stock(GTK_STOCK_SAVE);
+  find = gtk_button_new_from_stock(GTK_STOCK_FIND);
+  gtk_box_pack_end(GTK_BOX(hbox), save, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), find, FALSE, FALSE, 0);
 
   return hbox;
 }
