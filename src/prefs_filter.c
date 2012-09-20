@@ -221,6 +221,7 @@ static void prefs_filter_menu_ok_cb(GtkWidget *widget, gpointer data)
 #define SYLPF_FUNC_NAME "prefs_filter_menu_ok_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
+  gtk_widget_destroy(GTK_WIDGET(data));
 #undef SYLPF_FUNC_NAME
 }
 
@@ -229,5 +230,6 @@ static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data)
 #define SYLPF_FUNC_NAME "prefs_filter_menu_cancel_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
+  gtk_widget_destroy(GTK_WIDGET(data));
 #undef SYLPF_FUNC_NAME
 }
