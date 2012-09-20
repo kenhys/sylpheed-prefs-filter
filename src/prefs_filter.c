@@ -301,6 +301,9 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
                    FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
   
+  manage_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Manage filter rule"));
+  gtk_box_pack_start(GTK_BOX(page), manage_frame, FALSE, FALSE, 0);
+
   label = gtk_label_new(_("General"));
   gtk_notebook_append_page(GTK_NOTEBOOK(notebook), page, label);
   gtk_widget_show_all(notebook);
