@@ -314,6 +314,16 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
                      FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), filter_exec, 
                      FALSE, FALSE, 0);
+  hbox = gtk_hbox_new(FALSE, 0);
+  /* test current filter rule in inbox folder. */
+  filter_check = gtk_button_new_from_stock(GTK_STOCK_FIND);
+  /* execute current filter rule in inbox folder. */
+  filter_exec = gtk_button_new_from_stock(GTK_STOCK_EXECUTE);
+  gtk_box_pack_end(GTK_BOX(hbox), filter_exec,
+                   FALSE, FALSE, 0);
+  gtk_box_pack_end(GTK_BOX(hbox), filter_check,
+                   FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), filter_save, 
                      FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
