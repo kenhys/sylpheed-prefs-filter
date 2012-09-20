@@ -250,9 +250,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *filter_label;
   GtkWidget *filter_name_widget;
   GtkWidget *filter_rule_widget;
-  GtkWidget *filter_to_label;
-  GtkWidget *filter_to_text;
-  GtkWidget *filter_to_folder;
+  GtkWidget *filter_to_widget;
   GtkWidget *filter_test;
   GtkWidget *filter_check;
   GtkWidget *filter_exec;
@@ -275,17 +273,8 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_box_pack_start(GTK_BOX(vbox), filter_rule_widget, FALSE, FALSE, 0);
   
   /* filter rule apply to */
-  hbox = gtk_hbox_new(FALSE, 0);
-  filter_to_label = gtk_label_new(_("Apply to:"));
-  filter_to_text = gtk_entry_new();
-  gtk_box_pack_start(GTK_BOX(hbox), filter_to_label, 
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_to_text, 
-                     FALSE, FALSE, 0);
-  filter_to_folder = gtk_button_new_from_stock(GTK_STOCK_OPEN);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_to_folder, 
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+  filter_to_widget = create_filter_to_widget();
+  gtk_box_pack_start(GTK_BOX(vbox), filter_to_widget, FALSE, FALSE, 0);
 
   /* Note: add save button and here. */
   hbox = gtk_hbox_new(FALSE, 0);
@@ -350,6 +339,24 @@ static GtkWidget *create_filter_rule_widget(void)
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+
+  return hbox;
+}
+
+static GtkWidget *create_filter_to_widget(void)
+{
+  GtkWidget *hbox;
+  GtkWidget *label;
+  GtkWidget *folder;
+  GtkWidget *text;
+
+  hbox = gtk_hbox_new(FALSE, 0);
+  label = gtk_label_new(_("Apply to:"));
+  text = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+  folder = gtk_button_new_from_stock(GTK_STOCK_OPEN);
+  gtk_box_pack_start(GTK_BOX(hbox), folder, FALSE, FALSE, 0);
 
   return hbox;
 }

@@ -61,5 +61,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey);
 static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey);
 static GtkWidget *create_filter_name_widget(void);
 static GtkWidget *create_filter_rule_widget(void);
+static GtkWidget *create_filter_to_widget(void);
+
 
 #endif /* __PREFS_FILTER_H__ */
