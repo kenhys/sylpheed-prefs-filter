@@ -259,6 +259,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *filter_check;
   GtkWidget *filter_exec;
   GtkWidget *filter_save;
+  GtkWidget *filter_save_folder;
   GtkWidget *rule_frame;
 
   SYLPF_START_FUNC
@@ -304,16 +305,15 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   hbox = gtk_hbox_new(FALSE, 0);
   SYLPF_OPTION.create_folder = gtk_check_button_new_with_label(_("Create filtering folder automatically"));
   filter_save = gtk_button_new_from_stock(GTK_STOCK_SAVE);
-  /* test current filter rule in inbox folder. */
-  filter_check = gtk_button_new_from_stock(GTK_STOCK_FIND);
-  /* execute current filter rule in inbox folder. */
-  filter_exec = gtk_button_new_from_stock(GTK_STOCK_EXECUTE);
+  filter_save_folder = gtk_button_new_from_stock(GTK_STOCK_DIRECTORY);
   gtk_box_pack_start(GTK_BOX(hbox), SYLPF_OPTION.create_folder, 
                      FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_check, 
+  gtk_box_pack_start(GTK_BOX(hbox), filter_save, 
                      FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_exec, 
+  gtk_box_pack_start(GTK_BOX(hbox), filter_save_folder, 
                      FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+
   hbox = gtk_hbox_new(FALSE, 0);
   /* test current filter rule in inbox folder. */
   filter_check = gtk_button_new_from_stock(GTK_STOCK_FIND);
@@ -324,10 +324,6 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_box_pack_end(GTK_BOX(hbox), filter_check,
                    FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_save, 
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
-
   
   rule_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Fiter rule"));
   
