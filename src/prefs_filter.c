@@ -255,6 +255,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *filter_rule_text;
   GtkWidget *filter_to_label;
   GtkWidget *filter_to_text;
+  GtkWidget *filter_to_folder;
   GtkWidget *filter_test;
   GtkWidget *filter_check;
   GtkWidget *filter_exec;
@@ -299,18 +300,18 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
                      FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), filter_to_text, 
                      FALSE, FALSE, 0);
+  filter_to_folder = gtk_button_new_from_stock(GTK_STOCK_OPEN);
+  gtk_box_pack_start(GTK_BOX(hbox), filter_to_folder, 
+                     FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
   /* Note: add save button and here. */
   hbox = gtk_hbox_new(FALSE, 0);
   SYLPF_OPTION.create_folder = gtk_check_button_new_with_label(_("Create filtering folder automatically"));
   filter_save = gtk_button_new_from_stock(GTK_STOCK_SAVE);
-  filter_save_folder = gtk_button_new_from_stock(GTK_STOCK_DIRECTORY);
   gtk_box_pack_start(GTK_BOX(hbox), SYLPF_OPTION.create_folder, 
                      FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), filter_save, 
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_save_folder, 
                      FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
