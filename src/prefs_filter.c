@@ -233,3 +233,148 @@ static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data)
   gtk_widget_destroy(GTK_WIDGET(data));
 #undef SYLPF_FUNC_NAME
 }
+
+static gchar* copyright_message =
+  N_("PrefsFilter is distributed under 2-Clause BSD license.\n"
+     "\n"
+     "Copyright (C) 2012 HAYASHI Kentaro <kenhys@gmail.com>"
+     "\n");
+
+static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
+{
+#define SYLPF_FUNC_NAME "create_config_main_page"
+
+  GtkWidget *vbox;
+  GtkWidget *hbox;
+  GtkWidget *startup_align;
+  GtkWidget *label;
+  GtkWidget *filter_label;
+  GtkWidget *filter_name_label;
+  GtkWidget *filter_name_text;
+  GtkWidget *filter_rule_label;
+  GtkWidget *filter_rule_widget;
+  GtkWidget *filter_rule_text;
+  GtkWidget *filter_to_label;
+  GtkWidget *filter_to_text;
+  GtkWidget *filter_test;
+  GtkWidget *filter_check;
+  GtkWidget *filter_exec;
+  GtkWidget *filter_save;
+  GtkWidget *rule_frame;
+
+  SYLPF_START_FUNC
+
+  vbox = gtk_vbox_new(FALSE, 0);
+
+  /* manage filter rule Note: prepare edit,delete and list view */
+
+  /* filter name */
+  hbox = gtk_hbox_new(FALSE, 0);
+  filter_name_label = gtk_label_new(_("Filter name:"));
+  filter_name_text = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(hbox), filter_name_label,
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), filter_name_text,
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+                     
+  /* filter rule */
+  hbox = gtk_hbox_new(FALSE, 0);
+  filter_rule_label = gtk_label_new(_("Filter rule:"));
+  filter_rule_widget = gtk_entry_new(); /* consider to use combo box. */
+  filter_rule_text = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(hbox), filter_rule_label, 
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), filter_rule_widget, 
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), filter_rule_text, 
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+  
+  /* filter rule apply to */
+  hbox = gtk_hbox_new(FALSE, 0);
+  filter_to_label = gtk_label_new(_("Apply to:"));
+  filter_to_text = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(hbox), filter_to_label, 
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), filter_to_text, 
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+
+  /* Note: add save button and here. */
+  hbox = gtk_hbox_new(FALSE, 0);
+  SYLPF_OPTION.create_folder = gtk_check_button_new_with_label(_("Create filtering folder automatically"));
+  filter_save = gtk_button_new_from_stock(GTK_STOCK_SAVE);
+  /* test current filter rule in inbox folder. */
+  filter_check = gtk_button_new_from_stock(GTK_STOCK_FIND);
+  /* execute current filter rule in inbox folder. */
+  filter_exec = gtk_button_new_from_stock(GTK_STOCK_EXECUTE);
+  gtk_box_pack_start(GTK_BOX(hbox), SYLPF_OPTION.create_folder, 
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), filter_check, 
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), filter_exec, 
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), filter_save, 
+                     FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+
+  
+  rule_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Fiter rule"));
+  
+  label = gtk_label_new(_("General"));
+  gtk_notebook_append_page(GTK_NOTEBOOK(notebook), rule_frame, label);
+  gtk_widget_show_all(notebook);
+
+  SYLPF_END_FUNC
+#undef SYLPF_FUNC_NAME
+
+  return NULL;
+}
+
+static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey)
+{
+#define SYLPF_FUNC_NAME "create_config_about_page"
+
+  GtkWidget *hbox;
+  GtkWidget *vbox;
+  GtkWidget *misc;
+  GtkWidget *scrolled;
+  GtkTextBuffer *tbuffer;
+  GtkWidget *tview;
+  GtkWidget *label;
+  
+  SYLPF_START_FUNC
+
+  hbox = gtk_hbox_new(TRUE, 6);
+  vbox = gtk_vbox_new(FALSE, 6);
+  gtk_box_pack_start(GTK_BOX(hbox), vbox, TRUE, TRUE, 6);
+
+  misc = gtk_label_new("PrefsFilter");
+  gtk_box_pack_start(GTK_BOX(vbox), misc, FALSE, TRUE, 6);
+
+  misc = gtk_label_new(PLUGIN_DESC);
+  gtk_box_pack_start(GTK_BOX(vbox), misc, FALSE, TRUE, 6);
+
+  /* copyright */
+  scrolled = gtk_scrolled_window_new(NULL, NULL);
+
+  tbuffer = gtk_text_buffer_new(NULL);
+  gtk_text_buffer_set_text(tbuffer, _(copyright_message),
+                           strlen(copyright_message));
+  tview = gtk_text_view_new_with_buffer(tbuffer);
+  gtk_text_view_set_editable(GTK_TEXT_VIEW(tview), FALSE);
+  gtk_container_add(GTK_CONTAINER(scrolled), tview);
+
+  gtk_box_pack_start(GTK_BOX(vbox), scrolled, TRUE, TRUE, 6);
+
+  label = gtk_label_new(_("About"));
+  gtk_notebook_append_page(GTK_NOTEBOOK(notebook), hbox, label);
+  gtk_widget_show_all(notebook);
+
+  SYLPF_END_FUNC
+#undef SYLPF_FUNC_NAME
+
+  return NULL;
+}
+
