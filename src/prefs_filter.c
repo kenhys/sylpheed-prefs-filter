@@ -291,9 +291,12 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   edit_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Edit filter rule"));
   gtk_box_pack_start(GTK_BOX(page), edit_frame, FALSE, FALSE, 0);
   
-  filter_manage_button_widget = \
+
+  vbox = gtk_vbox_new(FALSE, 0);
+
+  filter_manage_button_widget =                 \
     create_filter_manage_button_widget();
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), filter_manage_button_widget, FALSE, FALSE, 0);
   
   manage_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Manage filter rule"));
   gtk_box_pack_start(GTK_BOX(page), manage_frame, FALSE, FALSE, 0);
