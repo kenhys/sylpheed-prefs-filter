@@ -277,8 +277,8 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_box_pack_start(GTK_BOX(vbox), filter_to_widget, FALSE, FALSE, 0);
 
   /* Note: add save button and here. */
-  hbox = gtk_hbox_new(FALSE, 0);
-  SYLPF_OPTION.create_folder = gtk_check_button_new_with_label(_("Create filtering folder automatically"));
+  create_folder_option_widget();
+
   filter_save = gtk_button_new_from_stock(GTK_STOCK_SAVE);
   gtk_box_pack_start(GTK_BOX(hbox), SYLPF_OPTION.create_folder, 
                      FALSE, FALSE, 0);
@@ -357,6 +357,18 @@ static GtkWidget *create_filter_to_widget(void)
   gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
   folder = gtk_button_new_from_stock(GTK_STOCK_OPEN);
   gtk_box_pack_start(GTK_BOX(hbox), folder, FALSE, FALSE, 0);
+
+  return hbox;
+}
+
+static GtkWidget *create_folder_option_widget(void)
+{
+  GtkWidget *hbox;
+
+  hbox = gtk_hbox_new(FALSE, 0);
+  SYLPF_OPTION.create_folder = \
+    gtk_check_button_new_with_label(_("Create filtering folder automatically"));
+  gtk_box_pack_start(GTK_BOX(hbox), SYLPF_OPTION.create_folder, FALSE, FALSE, 0);
 
   return hbox;
 }
