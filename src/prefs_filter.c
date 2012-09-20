@@ -249,10 +249,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *label;
   GtkWidget *filter_label;
   GtkWidget *filter_name_widget;
-  GtkWidget *filter_name_text;
-  GtkWidget *filter_rule_label;
   GtkWidget *filter_rule_widget;
-  GtkWidget *filter_rule_text;
   GtkWidget *filter_to_label;
   GtkWidget *filter_to_text;
   GtkWidget *filter_to_folder;
@@ -274,17 +271,8 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_box_pack_start(GTK_BOX(vbox), filter_name_widget, FALSE, FALSE, 0);
                      
   /* filter rule */
-  hbox = gtk_hbox_new(FALSE, 0);
-  filter_rule_label = gtk_label_new(_("Filter rule:"));
-  filter_rule_widget = gtk_entry_new(); /* consider to use combo box. */
-  filter_rule_text = gtk_entry_new();
-  gtk_box_pack_start(GTK_BOX(hbox), filter_rule_label, 
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_rule_widget, 
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_rule_text, 
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+  filter_rule_widget = create_filter_rule_widget();
+  gtk_box_pack_start(GTK_BOX(vbox), filter_rule_widget, FALSE, FALSE, 0);
   
   /* filter rule apply to */
   hbox = gtk_hbox_new(FALSE, 0);
@@ -342,6 +330,25 @@ static GtkWidget *create_filter_name_widget(void)
   label = gtk_label_new(_("Filter name:"));
   text = gtk_entry_new();
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+
+  return hbox;
+}
+
+static GtkWidget *create_filter_rule_widget(void)
+{
+  GtkWidget *hbox;
+  GtkWidget *label;
+  GtkWidget *combo;
+  GtkWidget *text;
+
+  hbox = gtk_hbox_new(FALSE, 0);
+  label = gtk_label_new(_("Filter rule:"));
+  combo = gtk_combo_box_new();
+  text = gtk_entry_new();
+
+  gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
 
   return hbox;
