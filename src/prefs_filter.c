@@ -288,6 +288,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_box_pack_start(GTK_BOX(vbox), filter_editing_button_widget, FALSE, FALSE, 0);
 
   edit_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Edit filter rule"));
+  gtk_box_pack_start(GTK_BOX(page), edit_frame, FALSE, FALSE, 0);
   
   hbox = gtk_hbox_new(FALSE, 0);
   /* test current filter rule in inbox folder. */
@@ -301,7 +302,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
   
   label = gtk_label_new(_("General"));
-  gtk_notebook_append_page(GTK_NOTEBOOK(notebook), rule_frame, label);
+  gtk_notebook_append_page(GTK_NOTEBOOK(notebook), page, label);
   gtk_widget_show_all(notebook);
 
   SYLPF_END_FUNC
