@@ -27,6 +27,8 @@ struct _PrefsFilterOption
   GtkWidget *plugin_off;
   GtkWidget *plugin_switch;
   GtkTooltips *plugin_tooltip;
+
+  GtkWidget *create_folder;
 };
 
 static void init_done_cb(GObject *obj, gpointer data);
