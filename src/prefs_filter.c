@@ -248,7 +248,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *startup_align;
   GtkWidget *label;
   GtkWidget *filter_label;
-  GtkWidget *filter_name_label;
+  GtkWidget *filter_name_widget;
   GtkWidget *filter_name_text;
   GtkWidget *filter_rule_label;
   GtkWidget *filter_rule_widget;
@@ -270,14 +270,8 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   /* manage filter rule Note: prepare edit,delete and list view */
 
   /* filter name */
-  hbox = gtk_hbox_new(FALSE, 0);
-  filter_name_label = gtk_label_new(_("Filter name:"));
-  filter_name_text = gtk_entry_new();
-  gtk_box_pack_start(GTK_BOX(hbox), filter_name_label,
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), filter_name_text,
-                     FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+  filter_name_widget = create_filter_name_widget();
+  gtk_box_pack_start(GTK_BOX(vbox), filter_name_widget, FALSE, FALSE, 0);
                      
   /* filter rule */
   hbox = gtk_hbox_new(FALSE, 0);
@@ -336,6 +330,21 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
 #undef SYLPF_FUNC_NAME
 
   return NULL;
+}
+
+static GtkWidget *create_filter_name_widget(void)
+{
+  GtkWidget *hbox;
+  GtkWidget *label;
+  GtkWidget *text;
+
+  hbox = gtk_hbox_new(FALSE, 0);
+  label = gtk_label_new(_("Filter name:"));
+  text = gtk_entry_new();
+  gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+
+  return hbox;
 }
 
 static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey)
