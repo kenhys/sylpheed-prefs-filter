@@ -320,6 +320,15 @@ static GtkWidget *create_filter_name_widget(void)
   return hbox;
 }
 
+static const gchar *header_list[] = {
+  "Date:",
+  "From:",
+  "To:",
+  "Subject:",
+  "In-Reply-To:",
+  "Cc:",
+};
+
 static GtkWidget *create_filter_rule_widget(void)
 {
   GtkWidget *hbox;
