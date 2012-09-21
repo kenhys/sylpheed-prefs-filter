@@ -266,21 +266,15 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   vbox = gtk_vbox_new(FALSE, 0);
   page = gtk_vbox_new(FALSE, 0);
 
-  /* manage filter rule Note: prepare edit,delete and list view */
-
-  /* filter name */
   filter_name_widget = create_filter_name_widget();
   gtk_box_pack_start(GTK_BOX(vbox), filter_name_widget, FALSE, FALSE, 0);
                      
-  /* filter rule */
   filter_rule_widget = create_filter_rule_widget();
   gtk_box_pack_start(GTK_BOX(vbox), filter_rule_widget, FALSE, FALSE, 0);
   
-  /* filter rule apply to */
   filter_to_widget = create_filter_to_widget();
   gtk_box_pack_start(GTK_BOX(vbox), filter_to_widget, FALSE, FALSE, 0);
 
-  /* Note: add save button and here. */
   create_folder_widget = create_folder_option_widget();
   gtk_box_pack_start(GTK_BOX(vbox), create_folder_widget, FALSE, FALSE, 0);
 
