@@ -8,7 +8,7 @@ sylpf_dir = ../sylplugin_factory
 update-po:
 	xgettext src/*.[ch] -k_ -kN_ -o po/$(PLUGIN_NAME).pot
 	if [ ! -f po/ja.po ]; then \
-		if [ -f $(PLUGIN_NAME).pot ]; then \
+		if [ -f po/$(PLUGIN_NAME).pot ]; then \
 			cp po/$(PLUGIN_NAME).pot po/ja.po; \
 		fi \
 	else \
