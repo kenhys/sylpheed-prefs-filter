@@ -9,12 +9,16 @@ prefs_filter_la_SOURCES = prefs_filter.c prefs_filter.h \
 	$(sylpf_srcdir)/sylpf_utility.h
 prefs_filter_la_LDFLAGS = -module -no-undefined -avoid-version
 
-bin_PROGRAMS = prefs_filter
+prefs_filter_la_LIBADD = \
+	$(GTK_LIBS) \
+	$(sylpheed_build_dir)/src/libsylpheed-plugin-0.la \
+	$(sylpheed_build_dir)/libsylph/libsylph-0.la
+
+bin_PROGRAMS = prefs-filter
 
 prefs_filter_CFLAGS = \
 	$(AM_CFLAGS) \
-	$(GTK_CFLAGS) \
-	-DPREFS_FILTER_MAIN
+	$(GTK_CFLAGS)
 
 prefs_filter_LDADD = \
 	$(GTK_LIBS) \
@@ -23,7 +27,7 @@ prefs_filter_LDADD = \
 
 prefs_filter_SOURCES = \
 	$(sylpf_srcdir)/sylpf_utility.c \
-	$(sylpf_srcdir)/sylpf_utility.h
+	$(sylpf_srcdir)/sylpf_utility.h \
 	prefs_filter.h \
 	prefs_filter.c \
 	prefs_filter_util.h \
@@ -37,10 +41,6 @@ INCLUDES = \
 	-I$(sylpheed_build_dir)/src \
 	-I$(sylpf_srcdir)
 
-prefs_filter_la_LIBADD = \
-	$(GTK_LIBS) \
-        $(sylpheed_build_dir)/src/libsylpheed-plugin-0.la \
-	$(sylpheed_build_dir)/libsylph/libsylph-0.la
 
 install:
 install-plugin: install-am
