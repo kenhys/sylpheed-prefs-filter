@@ -11,6 +11,7 @@
 #include "sylmain.h"
 #include "plugin.h"
 #include "folder.h"
+#include "foldersel.h"
 #include "procmsg.h"
 #include "prefs_filter.h"
 
@@ -348,6 +349,19 @@ static GtkWidget *create_filter_rule_widget(void)
   return hbox;
 }
 
+static void prefs_filter_to_folder_cb(GObject *obj, gpointer data)
+{
+  gchar *dir_name = NULL;
+  GtkWidget *dialog;
+  FolderItem *dest_item;
+  dest_item = syl_plugin_folder_sel(NULL,
+                                    FOLDER_SEL_COPY,
+                                    NULL);
+  if (dest_item && dest_item->path) {
+    gtk_entry_set_text(GTK_ENTRY(data), dest_item->path);
+  }
+}
+
 static GtkWidget *create_filter_to_widget(void)
 {
   GtkWidget *hbox;
@@ -360,7 +374,10 @@ static GtkWidget *create_filter_to_widget(void)
   text = gtk_entry_new();
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+
   folder = gtk_button_new_from_stock(GTK_STOCK_OPEN);
+  g_signal_connect(folder, "clicked",
+                   G_CALLBACK(prefs_filter_to_folder_cb), text);
   gtk_box_pack_start(GTK_BOX(hbox), folder, FALSE, FALSE, 0);
 
   return hbox;
