@@ -384,13 +384,13 @@ static GtkWidget *create_folder_option_widget(void)
 }
 
 
-static void prefs_filter_find_current_rule_cb(GtkWidget *widget,
-                                              gpointer data)
+static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
+                                               gpointer data)
 {
 }
 
-static void prefs_filter_save_current_rule_cb(GtkWidget *widget,
-                                              gpointer data)
+static void prefs_filter_add_current_rule_cb(GtkWidget *widget,
+                                             gpointer data)
 {
 }
 
@@ -398,20 +398,20 @@ static void prefs_filter_save_current_rule_cb(GtkWidget *widget,
 static GtkWidget *create_filter_edit_button_widget(void)
 {
   GtkWidget *hbox;
-  GtkWidget *find;
-  GtkWidget *save;
+  GtkWidget *check_rule;
+  GtkWidget *add_rule;
 
   hbox = gtk_hbox_new(FALSE, 0);
-  save = gtk_button_new_from_stock(GTK_STOCK_SAVE);
-  find = gtk_button_new_from_stock(GTK_STOCK_FIND);
-  gtk_box_pack_end(GTK_BOX(hbox), save, FALSE, FALSE, 0);
-  gtk_box_pack_end(GTK_BOX(hbox), find, FALSE, FALSE, 0);
+  add_rule = gtk_button_new_from_stock(GTK_STOCK_SAVE);
+  check_rule = gtk_button_new_from_stock(GTK_STOCK_FIND);
+  gtk_box_pack_end(GTK_BOX(hbox), add_rule, FALSE, FALSE, 0);
+  gtk_box_pack_end(GTK_BOX(hbox), check_rule, FALSE, FALSE, 0);
 
-  g_signal_connect(GTK_WIDGET(find), "clicked",
-                   G_CALLBACK(prefs_filter_find_current_rule_cb),
+  g_signal_connect(GTK_WIDGET(check_rule), "clicked",
+                   G_CALLBACK(prefs_filter_check_current_rule_cb),
                    NULL);
-  g_signal_connect(GTK_WIDGET(save), "clicked",
-                   G_CALLBACK(prefs_filter_save_current_rule_cb),
+  g_signal_connect(GTK_WIDGET(add_rule), "clicked",
+                   G_CALLBACK(prefs_filter_add_current_rule_cb),
                    NULL);
 
   return hbox;
