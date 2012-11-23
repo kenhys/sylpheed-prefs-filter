@@ -132,33 +132,13 @@ static void prefs_filter_menu_cb(void)
   gtk_widget_show(notebook);
   gtk_box_pack_start(GTK_BOX(vbox), notebook, TRUE, TRUE, 0);
 
-  confirm_area = gtk_hbutton_box_new();
-  gtk_button_box_set_layout(GTK_BUTTON_BOX(confirm_area), GTK_BUTTONBOX_END);
-  gtk_box_set_spacing(GTK_BOX(confirm_area), 6);
-
-
-  ok_btn = gtk_button_new_from_stock(GTK_STOCK_OK);
-  GTK_WIDGET_SET_FLAGS(ok_btn, GTK_CAN_DEFAULT);
-  gtk_box_pack_start(GTK_BOX(confirm_area), ok_btn, FALSE, FALSE, 0);
-  gtk_widget_show(ok_btn);
-
-  cancel_btn = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
-  GTK_WIDGET_SET_FLAGS(cancel_btn, GTK_CAN_DEFAULT);
-  gtk_box_pack_start(GTK_BOX(confirm_area), cancel_btn, FALSE, FALSE, 0);
-  gtk_widget_show(cancel_btn);
-
-  gtk_widget_show(confirm_area);
-
-  gtk_box_pack_end(GTK_BOX(vbox), confirm_area, FALSE, FALSE, 0);
-  gtk_widget_grab_default(ok_btn);
+  sylpf_pack_confirm_area(vbox,
+                          G_CALLBACK(prefs_filter_menu_ok_cb),
+                          G_CALLBACK(prefs_filter_menu_cancel_cb),
+                          window);
 
   gtk_window_set_title(GTK_WINDOW(window),
-                       _("Prefs filter Settings [prefs_filter]"));
-
-  g_signal_connect(G_OBJECT(ok_btn), "clicked",
-                   G_CALLBACK(prefs_filter_menu_ok_cb), window);
-  g_signal_connect(G_OBJECT(cancel_btn), "clicked",
-                   G_CALLBACK(prefs_filter_menu_cancel_cb), window);
+                       _("Prefs filter settings [prefs_filter]"));
   gtk_widget_show(window);
 
   SYLPF_END_FUNC
