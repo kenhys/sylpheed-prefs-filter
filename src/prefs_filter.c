@@ -387,11 +387,21 @@ static GtkWidget *create_folder_option_widget(void)
 static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
                                                gpointer data)
 {
+#define SYLPF_FUNC_NAME "prefs_filter_check_current_rule_cb"
+  SYLPF_START_FUNC;
+
+  SYLPF_END_FUNC;
+#undef SYLPF_FUNC_NAME
 }
 
 static void prefs_filter_add_current_rule_cb(GtkWidget *widget,
                                              gpointer data)
 {
+#define SYLPF_FUNC_NAME "prefs_filter_add_current_rule_cb"
+  SYLPF_START_FUNC;
+
+  SYLPF_END_FUNC;
+#undef SYLPF_FUNC_NAME
 }
 
 
