@@ -319,7 +319,15 @@ static GtkWidget *create_filter_rule_widget(void)
 
   hbox = gtk_hbox_new(FALSE, 0);
   label = gtk_label_new(_("Filter rule:"));
-  combo = gtk_combo_box_new();
+#if GTK_CHECK_VERSION(2, 24, 0)
+  combo = gtk_combo_box_text_new();
+  gtk_combo_box_append_text(GTK_COMBO_BOX(combo),
+                            _("Subject"));
+#else
+  combo = gtk_combo_box_new_with_text();
+  gtk_combo_box_append_text(GTK_COMBO_BOX(combo),
+                            _("Subject"));
+#endif
   text = gtk_entry_new();
 
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
