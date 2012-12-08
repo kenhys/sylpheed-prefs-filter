@@ -383,12 +383,24 @@ static GtkWidget *create_folder_option_widget(void)
   return hbox;
 }
 
+typedef struct _PrefsCurrentRule
+{
+  GtkWidget *target;
+  GtkWidget *rule;
+  GtkWidget *folder;
+} PrefsCurrentRule;
 
 static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
                                                gpointer data)
 {
 #define SYLPF_FUNC_NAME "prefs_filter_check_current_rule_cb"
+
+  PrefsCurrentRule *current;
+
   SYLPF_START_FUNC;
+
+  current = (PrefsCurrentRule *)data;
+  g_return_if_fail(current != NULL);
 
   SYLPF_END_FUNC;
 #undef SYLPF_FUNC_NAME
