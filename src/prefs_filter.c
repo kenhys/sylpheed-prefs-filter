@@ -434,7 +434,7 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
   gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), cancel, TRUE, TRUE, 0);
 
-  gtk_container_add(GTK_CONTAINER(dialog), progress);
+  gtk_container_add(GTK_CONTAINER(dialog), vbox);
   gtk_widget_show_all(dialog);
 
   SYLPF_END_FUNC;
