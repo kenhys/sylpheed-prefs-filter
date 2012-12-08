@@ -296,6 +296,31 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   return NULL;
 }
 
+static void prefs_filter_to_folder_cb(GObject *obj, gpointer data);
+static void inbox_folder_identifier_cb(GObject *obj, gpointer data);
+
+static GtkWidget *create_inbox_widget(void)
+{
+  GtkWidget *hbox;
+  GtkWidget *label;
+  GtkWidget *text;
+  GtkWidget *folder;
+
+  hbox = gtk_hbox_new(FALSE, 0);
+  label = gtk_label_new(_("Inbox:"));
+  text = gtk_entry_new();
+
+  folder = gtk_button_new_from_stock(GTK_STOCK_OPEN);
+  g_signal_connect(folder, "clicked",
+                   G_CALLBACK(inbox_folder_identifier_cb), text);
+
+  gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), folder, FALSE, FALSE, 0);
+
+  return hbox;
+}
+
 static GtkWidget *create_filter_name_widget(void)
 {
   GtkWidget *hbox;
@@ -345,6 +370,23 @@ static GtkWidget *create_filter_rule_widget(void)
   gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
 
   return hbox;
+}
+
+static void inbox_folder_identifier_cb(GObject *obj, gpointer data)
+{
+  gchar *dir_name = NULL;
+  gchar *identifier;
+  FolderItem *dest_item;
+  dest_item = syl_plugin_folder_sel(NULL,
+                                    FOLDER_SEL_COPY,
+                                    NULL);
+  if (dest_item && dest_item->path) {
+    SYLPF_DEBUG_STR("name", dest_item->name);
+    SYLPF_DEBUG_STR("path", dest_item->path);
+    identifier = folder_item_get_identifier(dest_item);
+    SYLPF_DEBUG_STR("identifier", identifier);
+    gtk_entry_set_text(GTK_ENTRY(data), identifier);
+  }
 }
 
 static void prefs_filter_to_folder_cb(GObject *obj, gpointer data)
