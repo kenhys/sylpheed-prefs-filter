@@ -477,22 +477,17 @@ static gpointer check_current_rule_thread(gpointer data)
   GSList *mlist;
   MsgInfo *minfo;
 
-#if DEBUG
-  for (step = 1; step <= 100; step++) {
-    matched = g_new(PrefsMatchedMail, 1);
-    matched->id = step;
-    matched->total = 100;
-    g_async_queue_push(queue, (gpointer)matched);
-    g_usleep(step * 10000);
-  }
-#endif
-
   mlist = (GSList*)data;
   if (mlist) {
     length = g_slist_length(mlist);
     for (step = 0; step < length; step++) {
       minfo = (MsgInfo*)g_slist_nth(mlist, step)->data;
       SYLPF_DEBUG_STR("subject", minfo->subject);
+
+      matched = g_new(PrefsMatchedMail, 1);
+      matched->id = step + 1;
+      matched->total = length;
+      g_async_queue_push(queue, (gpointer)matched);
     }
   }
 
