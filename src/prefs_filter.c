@@ -425,6 +425,7 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
 
   progress = gtk_progress_bar_new();
   gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), _("Searching received mail archives..."));
+  gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 0.0);
 
   dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
