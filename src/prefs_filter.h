@@ -61,6 +61,7 @@ static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data);
 
 static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey);
 static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey);
+static GtkWidget *create_inbox_widget(void);
 static GtkWidget *create_filter_name_widget(void);
 static GtkWidget *create_filter_rule_widget(void);
 static GtkWidget *create_filter_to_widget(void);

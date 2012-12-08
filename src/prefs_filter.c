@@ -238,6 +238,8 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *filter_exec;
   GtkWidget *filter_save;
   GtkWidget *filter_save_folder;
+  GtkWidget *inbox_frame;
+  GtkWidget *inbox_widget;
   GtkWidget *edit_frame;
   GtkWidget *manage_frame;
   GtkWidget *page;
@@ -246,6 +248,14 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
 
   vbox = gtk_vbox_new(FALSE, 0);
   page = gtk_vbox_new(FALSE, 0);
+
+  inbox_widget = create_inbox_widget();
+  gtk_box_pack_start(GTK_BOX(vbox), inbox_widget, FALSE, FALSE, 0);
+
+  inbox_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Mail inbox"));
+  gtk_box_pack_start(GTK_BOX(page), inbox_frame, FALSE, FALSE, 0);
+
+  vbox = gtk_vbox_new(FALSE, 0);
 
   filter_name_widget = create_filter_name_widget();
   gtk_box_pack_start(GTK_BOX(vbox), filter_name_widget, FALSE, FALSE, 0);
