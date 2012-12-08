@@ -409,6 +409,71 @@ static void check_current_rule_cancel_cb(GtkWidget *widget,
 #undef SYLPF_FUNC_NAME
 }
 
+static GAsyncQueue *queue;
+
+typedef struct _PrefsMatchedMail
+{
+  guint id;
+  guint total;
+} PrefsMatchedMail;
+
+static gpointer check_current_rule_thread(gpointer data)
+{
+#define SYLPF_FUNC_NAME "check_current_rule_thread"
+  SYLPF_START_FUNC;
+
+  PrefsMatchedMail *matched;
+  gint step = 0;
+
+#if DEBUG
+  for (step = 1; step <= 100; step++) {
+    matched = g_new(PrefsMatchedMail, 1);
+    matched->id = step;
+    matched->total = 100;
+    g_async_queue_push(queue, (gpointer)matched);
+    g_usleep(step * 10000);
+  }
+#endif
+
+  SYLPF_END_FUNC;
+#undef SYLPF_FUNC_NAME
+}
+
+static gboolean check_current_rule_polling(gpointer data)
+{
+#define SYLPF_FUNC_NAME "check_current_rule_polling"
+  gint queue_length;
+  PrefsMatchedMail *matched;
+
+  SYLPF_START_FUNC;
+
+  queue_length = g_async_queue_length(queue);
+  SYLPF_DEBUG_VAL("queue length", queue_length);
+  while (queue_length > 0) {
+    matched = (PrefsMatchedMail*)g_async_queue_pop(queue);
+    if (matched) {
+      SYLPF_DEBUG_PTR("queue item", matched);
+      SYLPF_DEBUG_VAL("queue id", matched->id);
+      SYLPF_DEBUG_VAL("queue total", matched->total);
+      if (matched->id < matched->total) {
+        gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(current_rule.progress),
+                                      (gdouble)matched->id/matched->total);
+      } else {
+        gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(current_rule.progress),
+                                      1.0);
+        g_thread_join(data);
+        return FALSE;
+      }
+    }
+    queue_length--;
+  }
+
+  SYLPF_END_FUNC;
+#undef SYLPF_FUNC_NAME
+
+  return TRUE;
+}
+
 static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
                                                gpointer data)
 {
@@ -418,6 +483,7 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
   GtkWidget *progress;
   GtkWidget *dialog;
   GtkWidget *vbox, *cancel;
+  GThread *worker;
 
   SYLPF_START_FUNC;
 
@@ -436,6 +502,8 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
   cancel = gtk_button_new_with_label(_("Cancel"));
 
   current->dialog = dialog;
+  current->progress = progress;
+
   g_signal_connect(GTK_WIDGET(cancel), "clicked",
                    G_CALLBACK(check_current_rule_cancel_cb),
                    data);
@@ -445,6 +513,12 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
 
   gtk_container_add(GTK_CONTAINER(dialog), vbox);
   gtk_widget_show_all(dialog);
+
+  queue = g_async_queue_new();
+
+  worker = g_thread_new("", check_current_rule_thread, NULL);
+
+  g_timeout_add(1000, check_current_rule_polling, worker);
 
   SYLPF_END_FUNC;
 #undef SYLPF_FUNC_NAME
