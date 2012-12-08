@@ -467,7 +467,7 @@ static GtkWidget *create_filter_edit_button_widget(void)
 
   g_signal_connect(GTK_WIDGET(check_rule), "clicked",
                    G_CALLBACK(prefs_filter_check_current_rule_cb),
-                   current_rule);
+                   &current_rule);
   g_signal_connect(GTK_WIDGET(add_rule), "clicked",
                    G_CALLBACK(prefs_filter_add_current_rule_cb),
                    NULL);
