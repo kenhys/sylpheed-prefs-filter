@@ -408,11 +408,34 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
 #define SYLPF_FUNC_NAME "prefs_filter_check_current_rule_cb"
 
   PrefsCurrentRule *current;
+  GtkWidget *progress;
+  GtkWidget *dialog;
+  GtkWidget *vbox, *cancel;
 
   SYLPF_START_FUNC;
 
   current = (PrefsCurrentRule *)data;
   g_return_if_fail(current != NULL);
+
+  progress = gtk_progress_bar_new();
+  gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), _("Searching received mail archives..."));
+
+  dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
+
+  vbox = gtk_vbox_new(TRUE, 0);
+
+  cancel = gtk_button_new_with_label(_("Cancel"));
+
+  g_signal_connect(GTK_WIDGET(cancel), "clicked",
+                   G_CALLBACK(check_current_rule_cancel_cb),
+                   NULL);
+
+  gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), cancel, TRUE, TRUE, 0);
+
+  gtk_container_add(GTK_CONTAINER(dialog), progress);
+  gtk_widget_show_all(dialog);
 
   SYLPF_END_FUNC;
 #undef SYLPF_FUNC_NAME
@@ -443,7 +466,7 @@ static GtkWidget *create_filter_edit_button_widget(void)
 
   g_signal_connect(GTK_WIDGET(check_rule), "clicked",
                    G_CALLBACK(prefs_filter_check_current_rule_cb),
-                   NULL);
+                   current_rule);
   g_signal_connect(GTK_WIDGET(add_rule), "clicked",
                    G_CALLBACK(prefs_filter_add_current_rule_cb),
                    NULL);
