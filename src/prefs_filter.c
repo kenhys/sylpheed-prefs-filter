@@ -391,13 +391,18 @@ typedef struct _PrefsCurrentRule
   GtkWidget *folder;
 } PrefsCurrentRule;
 
-static PrefsCurrentRule *current_rule;
+static PrefsCurrentRule current_rule;
 
 static void check_current_rule_cancel_cb(GtkWidget *widget,
                                          gpointer data)
 {
 #define SYLPF_FUNC_NAME "prefs_filter_check_current_rule_cb"
   SYLPF_START_FUNC;
+
+  PrefsCurrentRule *current;
+
+  current = (PrefsCurrentRule*)data;
+  gtk_widget_destroy(current->dialog);
 
   SYLPF_END_FUNC;
 #undef SYLPF_FUNC_NAME
@@ -428,9 +433,10 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
 
   cancel = gtk_button_new_with_label(_("Cancel"));
 
+  current->dialog = dialog;
   g_signal_connect(GTK_WIDGET(cancel), "clicked",
                    G_CALLBACK(check_current_rule_cancel_cb),
-                   NULL);
+                   data);
 
   gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), cancel, TRUE, TRUE, 0);
