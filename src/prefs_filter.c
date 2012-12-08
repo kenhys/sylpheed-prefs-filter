@@ -386,6 +386,7 @@ static GtkWidget *create_folder_option_widget(void)
 typedef struct _PrefsCurrentRule
 {
   GtkWidget *dialog;
+  GtkWidget *progress;
   GtkWidget *target;
   GtkWidget *rule;
   GtkWidget *folder;
