@@ -439,8 +439,8 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
                    G_CALLBACK(check_current_rule_cancel_cb),
                    data);
 
-  gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
-  gtk_box_pack_start(GTK_BOX(vbox), cancel, TRUE, TRUE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, SYLPF_ALIGN_TOP);
+  gtk_box_pack_start(GTK_BOX(vbox), cancel, FALSE, FALSE, SYLPF_ALIGN_TOP);
 
   gtk_container_add(GTK_CONTAINER(dialog), vbox);
   gtk_widget_show_all(dialog);
