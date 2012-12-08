@@ -26,6 +26,8 @@ static SylPluginInfo info = {
 
 PrefsFilterOption SYLPF_OPTION;
 
+static PrefsCurrentRule current_rule;
+
 void plugin_load(void)
 {
   GList *list, *cur;
@@ -435,16 +437,6 @@ static GtkWidget *create_folder_option_widget(void)
   return hbox;
 }
 
-typedef struct _PrefsCurrentRule
-{
-  GtkWidget *dialog;
-  GtkWidget *progress;
-  GtkWidget *target;
-  GtkWidget *rule;
-  GtkWidget *folder;
-} PrefsCurrentRule;
-
-static PrefsCurrentRule current_rule;
 
 static void check_current_rule_cancel_cb(GtkWidget *widget,
                                          gpointer data)

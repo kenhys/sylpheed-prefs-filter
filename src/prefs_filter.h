@@ -31,6 +31,16 @@ struct _PrefsFilterOption
   GtkWidget *create_folder;
 };
 
+typedef struct _PrefsCurrentRule
+{
+  GtkWidget *dialog;
+  GtkWidget *progress;
+  GtkWidget *inbox;
+  GtkWidget *target;
+  GtkWidget *rule;
+  GtkWidget *folder;
+} PrefsCurrentRule;
+
 static void init_done_cb(GObject *obj, gpointer data);
 static void app_exit_cb(GObject *obj, gpointer data);
 
