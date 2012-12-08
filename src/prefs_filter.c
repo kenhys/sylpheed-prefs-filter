@@ -402,6 +402,9 @@ static void prefs_filter_to_folder_cb(GObject *obj, gpointer data)
                                     FOLDER_SEL_COPY,
                                     NULL);
   if (dest_item && dest_item->path) {
+    SYLPF_DEBUG_STR("name", dest_item->name);
+    SYLPF_DEBUG_STR("path", dest_item->path);
+    SYLPF_DEBUG_STR("identifier", folder_item_get_identifier(dest_item));
     gtk_entry_set_text(GTK_ENTRY(data), dest_item->path);
   }
 }
@@ -470,6 +473,9 @@ static gpointer check_current_rule_thread(gpointer data)
 
   PrefsMatchedMail *matched;
   gint step = 0;
+  guint length = 0;
+  GSList *mlist;
+  MsgInfo *minfo;
 
 #if DEBUG
   for (step = 1; step <= 100; step++) {
@@ -480,6 +486,15 @@ static gpointer check_current_rule_thread(gpointer data)
     g_usleep(step * 10000);
   }
 #endif
+
+  mlist = (GSList*)data;
+  if (mlist) {
+    length = g_slist_length(mlist);
+    for (step = 0; step < length; step++) {
+      minfo = (MsgInfo*)g_slist_nth(mlist, step)->data;
+      SYLPF_DEBUG_STR("subject", minfo->subject);
+    }
+  }
 
   SYLPF_END_FUNC;
 #undef SYLPF_FUNC_NAME
@@ -530,6 +545,9 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
   GtkWidget *dialog;
   GtkWidget *vbox, *cancel;
   GThread *worker;
+  GSList *mlist;
+  FolderItem *folder;
+  const gchar *identifier;
 
   SYLPF_START_FUNC;
 
@@ -562,7 +580,13 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
 
   queue = g_async_queue_new();
 
-  worker = g_thread_new("", check_current_rule_thread, NULL);
+  identifier = gtk_entry_get_text(GTK_ENTRY(current_rule.inbox));
+  folder = folder_find_item_from_identifier(identifier);
+  SYLPF_DEBUG_STR("default name", folder->name);
+  SYLPF_DEBUG_STR("default path", folder->path);
+  SYLPF_DEBUG_STR("default identifier", folder_item_get_identifier(folder));
+  mlist = folder_item_get_msg_list(folder, FALSE);
+  worker = g_thread_new("", check_current_rule_thread, mlist);
 
   g_timeout_add(1000, check_current_rule_polling, worker);
 
