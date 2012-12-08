@@ -390,6 +390,18 @@ typedef struct _PrefsCurrentRule
   GtkWidget *folder;
 } PrefsCurrentRule;
 
+static PrefsCurrentRule *current_rule;
+
+static void check_current_rule_cancel_cb(GtkWidget *widget,
+                                         gpointer data)
+{
+#define SYLPF_FUNC_NAME "prefs_filter_check_current_rule_cb"
+  SYLPF_START_FUNC;
+
+  SYLPF_END_FUNC;
+#undef SYLPF_FUNC_NAME
+}
+
 static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
                                                gpointer data)
 {
