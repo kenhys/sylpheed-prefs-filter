@@ -28,6 +28,7 @@ struct _PrefsFilterOption
   GtkWidget *plugin_switch;
   GtkTooltips *plugin_tooltip;
 
+  GtkWidget *inbox;
   GtkWidget *create_folder;
 };
 
