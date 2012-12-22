@@ -178,10 +178,24 @@ static void prefs_filter_add_msg_cb(GObject *obj, FolderItem *item,
 
 static void prefs_filter_menu_ok_cb(GtkWidget *widget, gpointer data)
 {
-#define SYLPF_FUNC_NAME "prefs_filter_menu_ok_cb"
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  gsize sz;
+  gchar *buf;
+
+  SYLPF_START_FUNC;
+
+  g_key_file_load_from_file(SYLPF_OPTION.rcfile,
+                            SYLPF_OPTION.rcpath,
+                            G_KEY_FILE_KEEP_COMMENTS, NULL);
+
+  buf = gtk_entry_get_text(GTK_ENTRY(SYLPF_OPTION.inbox));
+  SYLPF_SET_RC_STRING(SYLPF_OPTION.rcfile, "prefs", "inbox", buf);
+
+  buf = g_key_file_to_data(SYLPF_OPTION.rcfile, &sz, NULL);
+  g_file_set_contents(SYLPF_OPTION.rcpath, buf, sz, NULL);
+
   gtk_widget_destroy(GTK_WIDGET(data));
+
+  SYLPF_END_FUNC;
 }
 
 static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data)
@@ -189,7 +203,6 @@ static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data)
   SYLPF_START_FUNC
   SYLPF_END_FUNC
   gtk_widget_destroy(GTK_WIDGET(data));
-#undef SYLPF_FUNC_NAME
 }
 
 static gchar* copyright_message =
