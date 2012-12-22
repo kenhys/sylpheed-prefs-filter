@@ -303,7 +303,7 @@ static GtkWidget *create_inbox_widget(void)
   g_signal_connect(folder, "clicked",
                    G_CALLBACK(inbox_folder_identifier_cb), text);
 
-  current_rule.inbox = text;
+  SYLPF_OPTION.inbox = text;
 
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
