@@ -13,9 +13,10 @@
 #include "folder.h"
 #include "foldersel.h"
 #include "procmsg.h"
-#include "prefs_filter.h"
 
 #include "sylpf_utility.h"
+
+#include "prefs_filter.h"
 
 static SylPluginInfo info = {
   PLUGIN_NAME,
