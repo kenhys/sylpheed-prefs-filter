@@ -1,15 +1,16 @@
-*.in
 private_build.h
 *.dll
 *.o
 *.la
 *.lo
 *.log
+Makefile.in
 .compile
 .deps
 .libs
 config.*
 autom4te.*
+po/POTFILES
 config/*
 m4/lib*
 m4/lt*
