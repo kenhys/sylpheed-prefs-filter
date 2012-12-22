@@ -34,7 +34,6 @@ void plugin_load(void)
   const gchar *ver;
   gpointer mainwin;
 
-#define SYLPF_FUNC_NAME "plugin_load"
   SYLPF_START_FUNC
 
   mainwin = syl_plugin_main_window_get();
@@ -63,15 +62,12 @@ void plugin_load(void)
                             G_CALLBACK(prefs_filter_edit_open_cb), NULL);
 
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 void plugin_unload(void)
 {
-#define SYLPF_FUNC_NAME "plugin_unload"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 SylPluginInfo *plugin_info(void)
@@ -86,23 +82,18 @@ gint plugin_interface_version(void)
 
 static void init_done_cb(GObject *obj, gpointer data)
 {
-#define SYLPF_FUNC_NAME "init_done_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 static void app_exit_cb(GObject *obj, gpointer data)
 {
-#define SYLPF_FUNC_NAME "app_exit_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 static void prefs_filter_menu_cb(void)
 {
-#define SYLPF_FUNC_NAME "prefs_filter_menu_cb"
 
   /* show modal dialog */
   GtkWidget *window;
@@ -144,57 +135,44 @@ static void prefs_filter_menu_cb(void)
   gtk_widget_show(window);
 
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 static void folderview_menu_popup_cb(GObject *obj, GtkItemFactory *ifactory,
 				     gpointer data)
 {
-#define SYLPF_FUNC_NAME "folderview_menu_popup_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 static void inc_start_cb(GObject *obj, PrefsAccount *ac)
 {
-#define SYLPF_FUNC_NAME "inc_start_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 static void inc_finished_cb(GObject *obj, gint new_messages)
 {
-#define SYLPF_FUNC_NAME "inc_finished_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 static void prefs_filter_open_cb(GObject *obj, PrefsAccount *ac)
 {
-#define SYLPF_FUNC_NAME "prefs_filter_open_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 static void prefs_filter_edit_open_cb(GObject *obj, PrefsAccount *ac)
 {
-#define SYLPF_FUNC_NAME "prefs_filter_edit_open_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 }
 
 static void prefs_filter_add_msg_cb(GObject *obj, FolderItem *item,
                                     const gchar *file, guint num)
 {
-#define SYLPF_FUNC_NAME "prefs_filter_add_msg_cb"
   SYLPF_START_FUNC;
   SYLPF_END_FUNC;
-#undef SYLPF_FUNC_NAME
 }
 
 
@@ -204,12 +182,10 @@ static void prefs_filter_menu_ok_cb(GtkWidget *widget, gpointer data)
   SYLPF_START_FUNC
   SYLPF_END_FUNC
   gtk_widget_destroy(GTK_WIDGET(data));
-#undef SYLPF_FUNC_NAME
 }
 
 static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data)
 {
-#define SYLPF_FUNC_NAME "prefs_filter_menu_cancel_cb"
   SYLPF_START_FUNC
   SYLPF_END_FUNC
   gtk_widget_destroy(GTK_WIDGET(data));
@@ -224,7 +200,6 @@ static gchar* copyright_message =
 
 static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
 {
-#define SYLPF_FUNC_NAME "create_config_main_page"
 
   GtkWidget *vbox;
   GtkWidget *hbox;
@@ -293,7 +268,6 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_widget_show_all(notebook);
 
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 
   return NULL;
 }
@@ -446,7 +420,6 @@ static GtkWidget *create_folder_option_widget(void)
 static void check_current_rule_cancel_cb(GtkWidget *widget,
                                          gpointer data)
 {
-#define SYLPF_FUNC_NAME "prefs_filter_check_current_rule_cb"
   SYLPF_START_FUNC;
 
   PrefsCurrentRule *current;
@@ -455,7 +428,6 @@ static void check_current_rule_cancel_cb(GtkWidget *widget,
   gtk_widget_destroy(current->dialog);
 
   SYLPF_END_FUNC;
-#undef SYLPF_FUNC_NAME
 }
 
 static GAsyncQueue *queue;
@@ -468,7 +440,6 @@ typedef struct _PrefsMatchedMail
 
 static gpointer check_current_rule_thread(gpointer data)
 {
-#define SYLPF_FUNC_NAME "check_current_rule_thread"
   SYLPF_START_FUNC;
 
   PrefsMatchedMail *matched;
@@ -492,12 +463,10 @@ static gpointer check_current_rule_thread(gpointer data)
   }
 
   SYLPF_END_FUNC;
-#undef SYLPF_FUNC_NAME
 }
 
 static gboolean check_current_rule_polling(gpointer data)
 {
-#define SYLPF_FUNC_NAME "check_current_rule_polling"
   gint queue_length;
   PrefsMatchedMail *matched;
 
@@ -525,7 +494,6 @@ static gboolean check_current_rule_polling(gpointer data)
   }
 
   SYLPF_END_FUNC;
-#undef SYLPF_FUNC_NAME
 
   return TRUE;
 }
@@ -533,7 +501,6 @@ static gboolean check_current_rule_polling(gpointer data)
 static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
                                                gpointer data)
 {
-#define SYLPF_FUNC_NAME "prefs_filter_check_current_rule_cb"
 
   PrefsCurrentRule *current;
   GtkWidget *progress;
@@ -586,17 +553,14 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
   g_timeout_add(1000, check_current_rule_polling, worker);
 
   SYLPF_END_FUNC;
-#undef SYLPF_FUNC_NAME
 }
 
 static void prefs_filter_add_current_rule_cb(GtkWidget *widget,
                                              gpointer data)
 {
-#define SYLPF_FUNC_NAME "prefs_filter_add_current_rule_cb"
   SYLPF_START_FUNC;
 
   SYLPF_END_FUNC;
-#undef SYLPF_FUNC_NAME
 }
 
 
@@ -647,7 +611,6 @@ static GtkWidget *create_filter_manage_button_widget(void)
 
 static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey)
 {
-#define SYLPF_FUNC_NAME "create_config_about_page"
 
   GtkWidget *hbox;
   GtkWidget *vbox;
@@ -686,7 +649,6 @@ static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_widget_show_all(notebook);
 
   SYLPF_END_FUNC
-#undef SYLPF_FUNC_NAME
 
   return NULL;
 }
