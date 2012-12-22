@@ -192,8 +192,8 @@ static void prefs_filter_add_msg_cb(GObject *obj, FolderItem *item,
                                     const gchar *file, guint num)
 {
 #define SYLPF_FUNC_NAME "prefs_filter_add_msg_cb"
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 #undef SYLPF_FUNC_NAME
 }
 
