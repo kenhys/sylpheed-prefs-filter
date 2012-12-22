@@ -62,7 +62,9 @@ void plugin_load(void)
   syl_plugin_signal_connect("prefs-filter-edit-open",
                             G_CALLBACK(prefs_filter_edit_open_cb), NULL);
 
-  SYLPF_END_FUNC
+  sylpf_load_option_rcfile(SYLPF_OPTION_P, SYLPF_PLUGIN_RC);
+  
+  SYLPF_END_FUNC;
 }
 
 void plugin_unload(void)
