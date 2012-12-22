@@ -10,6 +10,8 @@
 #define SYLPF_ID "prefs_filter"
 #define SYLPF_OPTION prefs_filter_option
 
+#define SYLPF_PLUGIN_RC "prefsfilterrc"
+
 #define PLUGIN_NAME N_("Prefs filter Plugin")
 #define PLUGIN_DESC N_("Preference filter settings plug-in for Sylpheed")
 
