@@ -309,7 +309,7 @@ static GtkWidget *create_inbox_widget(void)
   SYLPF_OPTION.inbox = text;
 
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), text, TRUE, TRUE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), folder, FALSE, FALSE, 0);
 
   return hbox;
@@ -325,7 +325,7 @@ static GtkWidget *create_filter_name_widget(void)
   label = gtk_label_new(_("Filter name:"));
   text = gtk_entry_new();
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), text, TRUE, TRUE, 0);
 
   return hbox;
 }
@@ -361,7 +361,7 @@ static GtkWidget *create_filter_rule_widget(void)
 
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), text, TRUE, TRUE, 0);
 
   return hbox;
 }
@@ -410,7 +410,7 @@ static GtkWidget *create_filter_to_widget(void)
   label = gtk_label_new(_("Apply to:"));
   text = gtk_entry_new();
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbox), text, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbox), text, TRUE, TRUE, 0);
 
   folder = gtk_button_new_from_stock(GTK_STOCK_OPEN);
   g_signal_connect(folder, "clicked",
