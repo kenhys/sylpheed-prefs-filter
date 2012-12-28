@@ -538,6 +538,21 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
   current = (PrefsCurrentRule *)data;
   g_return_if_fail(current != NULL);
 
+  g_return_if_fail(current_rule != NULL);
+  g_return_if_fail(current_rule.inbox != NULL);
+
+  identifier = gtk_entry_get_text(GTK_ENTRY(current_rule.inbox));
+  g_return_if_fail(identifier != NULL);
+
+  folder = folder_find_item_from_identifier(identifier);
+  g_return_if_fail(folder != NULL);
+
+  SYLPF_DEBUG_STR("default name", folder->name);
+  SYLPF_DEBUG_STR("default path", folder->path);
+  SYLPF_DEBUG_STR("default identifier", folder_item_get_identifier(folder));
+  mlist = folder_item_get_msg_list(folder, FALSE);
+  g_return_if_fail(mlist != NULL);
+
   progress = gtk_progress_bar_new();
   gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), _("Searching received mail archives..."));
   gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 0.0);
@@ -564,12 +579,6 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
 
   queue = g_async_queue_new();
 
-  identifier = gtk_entry_get_text(GTK_ENTRY(current_rule.inbox));
-  folder = folder_find_item_from_identifier(identifier);
-  SYLPF_DEBUG_STR("default name", folder->name);
-  SYLPF_DEBUG_STR("default path", folder->path);
-  SYLPF_DEBUG_STR("default identifier", folder_item_get_identifier(folder));
-  mlist = folder_item_get_msg_list(folder, FALSE);
   worker = g_thread_new("", check_current_rule_thread, mlist);
 
   g_timeout_add(1000, check_current_rule_polling, worker);
