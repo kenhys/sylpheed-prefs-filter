@@ -538,7 +538,6 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
   current = (PrefsCurrentRule *)data;
   g_return_if_fail(current != NULL);
 
-  g_return_if_fail(current_rule != NULL);
   g_return_if_fail(current_rule.inbox != NULL);
 
   identifier = gtk_entry_get_text(GTK_ENTRY(current_rule.inbox));
