@@ -297,7 +297,8 @@ static GtkWidget *create_inbox_widget(void)
   GtkWidget *label;
   GtkWidget *text;
   GtkWidget *folder;
-
+  const gchar *inbox;
+  
   hbox = gtk_hbox_new(FALSE, 0);
   label = gtk_label_new(_("Inbox:"));
   text = gtk_entry_new();
@@ -307,6 +308,11 @@ static GtkWidget *create_inbox_widget(void)
                    G_CALLBACK(inbox_folder_identifier_cb), text);
 
   SYLPF_OPTION.inbox = text;
+
+  inbox = SYLPF_GET_RC_STRING(SYLPF_OPTION.rcfile, "prefs", "inbox");
+  if (inbox) {
+    gtk_entry_set_text(GTK_ENTRY(text), inbox);
+  }
 
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), text, TRUE, TRUE, 0);
