@@ -14,7 +14,7 @@
 #include "foldersel.h"
 #include "procmsg.h"
 
-#include "sylpf_utility.h"
+#include "sylplugin_factory.h"
 
 #include "prefs_filter.h"
 
