@@ -35,8 +35,8 @@ void plugin_load(void)
   const gchar *ver;
   gpointer mainwin;
 
-  SYLPF_START_FUNC
-
+  SYLPF_START_FUNC;
+    
   mainwin = syl_plugin_main_window_get();
   syl_plugin_main_window_popup(mainwin);
 
@@ -69,8 +69,8 @@ void plugin_load(void)
 
 void plugin_unload(void)
 {
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 }
 
 SylPluginInfo *plugin_info(void)
@@ -85,14 +85,14 @@ gint plugin_interface_version(void)
 
 static void init_done_cb(GObject *obj, gpointer data)
 {
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 }
 
 static void app_exit_cb(GObject *obj, gpointer data)
 {
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 }
 
 static void prefs_filter_menu_cb(void)
@@ -105,7 +105,7 @@ static void prefs_filter_menu_cb(void)
   GtkWidget *ok_btn;
   GtkWidget *cancel_btn;
     
-  SYLPF_START_FUNC
+  SYLPF_START_FUNC;
 
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_container_set_border_width(GTK_CONTAINER(window), 8);
@@ -137,45 +137,45 @@ static void prefs_filter_menu_cb(void)
                        _("Prefs filter settings [prefs_filter]"));
   gtk_widget_show(window);
 
-  SYLPF_END_FUNC
+  SYLPF_END_FUNC;
 }
 
 static void folderview_menu_popup_cb(GObject *obj, GtkItemFactory *ifactory,
 				     gpointer data)
 {
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 }
 
 static void inc_start_cb(GObject *obj, PrefsAccount *ac)
 {
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 }
 
 static void inc_finished_cb(GObject *obj, gint new_messages)
 {
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 }
 
 static void prefs_filter_open_cb(GObject *obj, PrefsAccount *ac)
 {
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 }
 
 static void prefs_filter_edit_open_cb(GObject *obj, PrefsAccount *ac)
 {
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 }
 
 static void prefs_filter_add_msg_cb(GObject *obj, FolderItem *item,
                                     const gchar *file, guint num)
 {
-  SYLPF_START_FUNC;
-  SYLPF_END_FUNC;
+  SYLPF_START_FUNC;;
+  SYLPF_END_FUNC;;
 }
 
 
@@ -184,7 +184,7 @@ static void prefs_filter_menu_ok_cb(GtkWidget *widget, gpointer data)
   gsize sz;
   gchar *buf;
 
-  SYLPF_START_FUNC;
+  SYLPF_START_FUNC;;
 
   g_key_file_load_from_file(SYLPF_OPTION.rcfile,
                             SYLPF_OPTION.rcpath,
@@ -198,13 +198,13 @@ static void prefs_filter_menu_ok_cb(GtkWidget *widget, gpointer data)
 
   gtk_widget_destroy(GTK_WIDGET(data));
 
-  SYLPF_END_FUNC;
+  SYLPF_END_FUNC;;
 }
 
 static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data)
 {
-  SYLPF_START_FUNC
-  SYLPF_END_FUNC
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
   gtk_widget_destroy(GTK_WIDGET(data));
 }
 
@@ -237,7 +237,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *manage_frame;
   GtkWidget *page;
 
-  SYLPF_START_FUNC
+  SYLPF_START_FUNC;
 
   vbox = gtk_vbox_new(FALSE, 0);
   page = gtk_vbox_new(FALSE, 0);
@@ -283,7 +283,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_notebook_append_page(GTK_NOTEBOOK(notebook), page, label);
   gtk_widget_show_all(notebook);
 
-  SYLPF_END_FUNC
+  SYLPF_END_FUNC;
 
   return NULL;
 }
@@ -443,14 +443,14 @@ static GtkWidget *create_folder_option_widget(void)
 static void check_current_rule_cancel_cb(GtkWidget *widget,
                                          gpointer data)
 {
-  SYLPF_START_FUNC;
+  SYLPF_START_FUNC;;
 
   PrefsCurrentRule *current;
 
   current = (PrefsCurrentRule*)data;
   gtk_widget_destroy(current->dialog);
 
-  SYLPF_END_FUNC;
+  SYLPF_END_FUNC;;
 }
 
 static GAsyncQueue *queue;
@@ -463,7 +463,7 @@ typedef struct _PrefsMatchedMail
 
 static gpointer check_current_rule_thread(gpointer data)
 {
-  SYLPF_START_FUNC;
+  SYLPF_START_FUNC;;
 
   PrefsMatchedMail *matched;
   gint step = 0;
@@ -485,7 +485,7 @@ static gpointer check_current_rule_thread(gpointer data)
     }
   }
 
-  SYLPF_END_FUNC;
+  SYLPF_END_FUNC;;
 }
 
 static gboolean check_current_rule_polling(gpointer data)
@@ -493,7 +493,7 @@ static gboolean check_current_rule_polling(gpointer data)
   gint queue_length;
   PrefsMatchedMail *matched;
 
-  SYLPF_START_FUNC;
+  SYLPF_START_FUNC;;
 
   queue_length = g_async_queue_length(queue);
   SYLPF_DEBUG_VAL("queue length", queue_length);
@@ -516,7 +516,7 @@ static gboolean check_current_rule_polling(gpointer data)
     queue_length--;
   }
 
-  SYLPF_END_FUNC;
+  SYLPF_END_FUNC;;
 
   return TRUE;
 }
@@ -534,7 +534,7 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
   FolderItem *folder;
   const gchar *identifier;
 
-  SYLPF_START_FUNC;
+  SYLPF_START_FUNC;;
 
   current = (PrefsCurrentRule *)data;
   g_return_if_fail(current != NULL);
@@ -583,15 +583,15 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
 
   g_timeout_add(1000, check_current_rule_polling, worker);
 
-  SYLPF_END_FUNC;
+  SYLPF_END_FUNC;;
 }
 
 static void prefs_filter_add_current_rule_cb(GtkWidget *widget,
                                              gpointer data)
 {
-  SYLPF_START_FUNC;
+  SYLPF_START_FUNC;;
 
-  SYLPF_END_FUNC;
+  SYLPF_END_FUNC;;
 }
 
 
@@ -651,7 +651,7 @@ static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *tview;
   GtkWidget *label;
   
-  SYLPF_START_FUNC
+  SYLPF_START_FUNC;
 
   hbox = gtk_hbox_new(TRUE, 6);
   vbox = gtk_vbox_new(FALSE, 6);
@@ -679,7 +679,7 @@ static GtkWidget *create_config_about_page(GtkWidget *notebook, GKeyFile *pkey)
   gtk_notebook_append_page(GTK_NOTEBOOK(notebook), hbox, label);
   gtk_widget_show_all(notebook);
 
-  SYLPF_END_FUNC
+  SYLPF_END_FUNC;
 
   return NULL;
 }
