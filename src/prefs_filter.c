@@ -179,8 +179,8 @@ static void prefs_filter_edit_open_cb(GObject *obj, PrefsAccount *ac)
 static void prefs_filter_add_msg_cb(GObject *obj, FolderItem *item,
                                     const gchar *file, guint num)
 {
-  SYLPF_START_FUNC;;
-  SYLPF_END_FUNC;;
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
 }
 
 
@@ -189,7 +189,7 @@ static void prefs_filter_menu_ok_cb(GtkWidget *widget, gpointer data)
   gsize sz;
   gchar *buf;
 
-  SYLPF_START_FUNC;;
+  SYLPF_START_FUNC;
 
   g_key_file_load_from_file(SYLPF_OPTION.rcfile,
                             SYLPF_OPTION.rcpath,
@@ -203,7 +203,7 @@ static void prefs_filter_menu_ok_cb(GtkWidget *widget, gpointer data)
 
   gtk_widget_destroy(GTK_WIDGET(data));
 
-  SYLPF_END_FUNC;;
+  SYLPF_END_FUNC;
 }
 
 static void prefs_filter_menu_cancel_cb(GtkWidget *widget, gpointer data)
@@ -448,14 +448,14 @@ static GtkWidget *create_folder_option_widget(void)
 static void check_current_rule_cancel_cb(GtkWidget *widget,
                                          gpointer data)
 {
-  SYLPF_START_FUNC;;
+  SYLPF_START_FUNC;
 
   PrefsCurrentRule *current;
 
   current = (PrefsCurrentRule*)data;
   gtk_widget_destroy(current->dialog);
 
-  SYLPF_END_FUNC;;
+  SYLPF_END_FUNC;
 }
 
 static GAsyncQueue *queue;
@@ -468,7 +468,7 @@ typedef struct _PrefsMatchedMail
 
 static gpointer check_current_rule_thread(gpointer data)
 {
-  SYLPF_START_FUNC;;
+  SYLPF_START_FUNC;
 
   PrefsMatchedMail *matched;
   gint step = 0;
@@ -490,7 +490,7 @@ static gpointer check_current_rule_thread(gpointer data)
     }
   }
 
-  SYLPF_END_FUNC;;
+  SYLPF_END_FUNC;
 }
 
 static gboolean check_current_rule_polling(gpointer data)
@@ -498,7 +498,7 @@ static gboolean check_current_rule_polling(gpointer data)
   gint queue_length;
   PrefsMatchedMail *matched;
 
-  SYLPF_START_FUNC;;
+  SYLPF_START_FUNC;
 
   queue_length = g_async_queue_length(queue);
   SYLPF_DEBUG_VAL("queue length", queue_length);
@@ -521,7 +521,7 @@ static gboolean check_current_rule_polling(gpointer data)
     queue_length--;
   }
 
-  SYLPF_END_FUNC;;
+  SYLPF_END_FUNC;
 
   return TRUE;
 }
@@ -588,7 +588,7 @@ static void check_current_rule_cb(GtkWidget *widget,
 
   g_timeout_add(1000, check_current_rule_polling, worker);
 
-  SYLPF_END_FUNC;;
+  SYLPF_END_FUNC;
 }
 
 static void add_current_rule_cb(GtkWidget *widget,
