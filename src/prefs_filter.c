@@ -239,6 +239,7 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
   GtkWidget *inbox_frame;
   GtkWidget *inbox_widget;
   GtkWidget *edit_frame;
+  GtkWidget *rule_widget;
   GtkWidget *manage_frame;
   GtkWidget *page;
 
@@ -277,8 +278,9 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
 
   vbox = gtk_vbox_new(FALSE, 0);
 
-  filter_manage_button_widget =                 \
-    create_filter_manage_button_widget();
+  rule_widget = create_rule_store_widget();
+  filter_manage_button_widget = create_filter_manage_button_widget();
+  gtk_box_pack_start(GTK_BOX(vbox), rule_widget, TRUE, TRUE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), filter_manage_button_widget, FALSE, FALSE, 0);
   
   manage_frame = sylpf_pack_widget_with_aligned_frame(vbox, _("Manage filter rule"));
@@ -619,6 +621,12 @@ static GtkWidget *create_filter_edit_button_widget(void)
                    G_CALLBACK(add_current_rule_cb),
                    NULL);
 
+  return hbox;
+}
+
+static GtkWidget *create_rule_store_widget(void)
+{
+  GtkWidget *hbox;
   return hbox;
 }
 
