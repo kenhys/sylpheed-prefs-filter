@@ -526,8 +526,8 @@ static gboolean check_current_rule_polling(gpointer data)
   return TRUE;
 }
 
-static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
-                                               gpointer data)
+static void check_current_rule_cb(GtkWidget *widget,
+                                  gpointer data)
 {
 
   PrefsCurrentRule *current;
@@ -591,8 +591,8 @@ static void prefs_filter_check_current_rule_cb(GtkWidget *widget,
   SYLPF_END_FUNC;;
 }
 
-static void prefs_filter_add_current_rule_cb(GtkWidget *widget,
-                                             gpointer data)
+static void add_current_rule_cb(GtkWidget *widget,
+                                gpointer data)
 {
   SYLPF_START_FUNC;;
 
@@ -613,10 +613,10 @@ static GtkWidget *create_filter_edit_button_widget(void)
   gtk_box_pack_end(GTK_BOX(hbox), check_rule, FALSE, FALSE, 0);
 
   g_signal_connect(GTK_WIDGET(check_rule), "clicked",
-                   G_CALLBACK(prefs_filter_check_current_rule_cb),
+                   G_CALLBACK(check_current_rule_cb),
                    &current_rule);
   g_signal_connect(GTK_WIDGET(add_rule), "clicked",
-                   G_CALLBACK(prefs_filter_add_current_rule_cb),
+                   G_CALLBACK(add_current_rule_cb),
                    NULL);
 
   return hbox;
