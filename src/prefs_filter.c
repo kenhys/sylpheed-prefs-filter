@@ -539,7 +539,7 @@ static void check_current_rule_cb(GtkWidget *widget,
   FolderItem *folder;
   const gchar *identifier;
 
-  SYLPF_START_FUNC;;
+  SYLPF_START_FUNC;
 
   current = (PrefsCurrentRule *)data;
   g_return_if_fail(current != NULL);
@@ -594,9 +594,9 @@ static void check_current_rule_cb(GtkWidget *widget,
 static void add_current_rule_cb(GtkWidget *widget,
                                 gpointer data)
 {
-  SYLPF_START_FUNC;;
+  SYLPF_START_FUNC;
 
-  SYLPF_END_FUNC;;
+  SYLPF_END_FUNC;
 }
 
 
