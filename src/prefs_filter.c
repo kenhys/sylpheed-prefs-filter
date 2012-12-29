@@ -308,6 +308,7 @@ static GtkWidget *create_inbox_widget(void)
                    G_CALLBACK(inbox_folder_identifier_cb), text);
 
   SYLPF_OPTION.inbox = text;
+  current_rule.inbox = text;
 
   inbox = SYLPF_GET_RC_STRING(SYLPF_OPTION.rcfile, "prefs", "inbox");
   if (inbox) {
