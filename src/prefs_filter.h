@@ -44,6 +44,14 @@ typedef struct _PrefsCurrentRule
   GtkWidget *folder;
 } PrefsCurrentRule;
 
+enum {
+  RULE_NAME_COLUMN,
+  RULE_FILTER_COLUMN,
+  RULE_TO_COLUMN,
+  RULE_MKDIR_COLUMN,
+  N_RULE_COLUMNS
+};
+
 static void init_done_cb(GObject *obj, gpointer data);
 static void app_exit_cb(GObject *obj, gpointer data);
 
