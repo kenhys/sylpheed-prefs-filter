@@ -45,11 +45,11 @@ typedef struct _PrefsCurrentRule
 } PrefsCurrentRule;
 
 enum {
+  RULE_MKDIR_COLUMN,
   RULE_NAME_COLUMN,
   RULE_SRC_COLUMN,
   RULE_FILTER_COLUMN,
   RULE_TO_COLUMN,
-  RULE_MKDIR_COLUMN,
   N_RULE_COLUMNS
 };
 
