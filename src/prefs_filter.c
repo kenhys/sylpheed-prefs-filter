@@ -360,6 +360,8 @@ static GtkWidget *create_filter_rule_widget(void)
   GtkWidget *combo;
   GtkWidget *text;
 
+  SYLPF_START_FUNC;
+
   hbox = gtk_hbox_new(FALSE, 0);
   label = gtk_label_new(_("Filter rule:"));
 #if GTK_CHECK_VERSION(2, 24, 0)
@@ -376,6 +378,8 @@ static GtkWidget *create_filter_rule_widget(void)
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), text, TRUE, TRUE, 0);
+
+  SYLPF_END_FUNC;
 
   return hbox;
 }
@@ -627,6 +631,57 @@ static GtkWidget *create_filter_edit_button_widget(void)
 static GtkWidget *create_rule_store_widget(void)
 {
   GtkWidget *hbox;
+  GtkWidget *tree;
+  GtkTreeStore *store;
+  GtkTreeViewColumn *column;
+  GtkCellRenderer *renderer;
+
+  SYLPF_START_FUNC;
+
+  hbox = gtk_hbox_new(FALSE, 0);
+
+  store = gtk_tree_store_new(N_RULE_COLUMNS,
+                             G_TYPE_STRING,
+                             G_TYPE_STRING,
+                             G_TYPE_STRING,
+                             G_TYPE_BOOLEAN);
+
+  tree = gtk_tree_view_new_with_model(GTK_TREE_MODEL(store));
+
+  renderer = gtk_cell_renderer_text_new();
+  column = gtk_tree_view_column_new_with_attributes(_("Name"),
+                                                    renderer,
+                                                    "text",
+                                                    RULE_NAME_COLUMN,
+                                                    NULL);
+  gtk_tree_view_append_column(GTK_TREE_VIEW(tree), column);
+
+  column = gtk_tree_view_column_new_with_attributes(_("Filter"),
+                                                    renderer,
+                                                    "text",
+                                                    RULE_FILTER_COLUMN,
+                                                    NULL);
+  gtk_tree_view_append_column(GTK_TREE_VIEW(tree), column);
+
+  column = gtk_tree_view_column_new_with_attributes(_("To"),
+                                                    renderer,
+                                                    "text",
+                                                    RULE_TO_COLUMN,
+                                                    NULL);
+  gtk_tree_view_append_column(GTK_TREE_VIEW(tree), column);
+
+  renderer = gtk_cell_renderer_toggle_new();
+  column = gtk_tree_view_column_new_with_attributes(_("Regist"),
+                                                    renderer,
+                                                    "active",
+                                                    RULE_MKDIR_COLUMN,
+                                                    NULL);
+  gtk_tree_view_append_column(GTK_TREE_VIEW(tree), column);
+
+  gtk_box_pack_start(GTK_BOX(hbox), tree, TRUE, TRUE, 0);
+
+  SYLPF_END_FUNC;
+
   return hbox;
 }
 
