@@ -11,6 +11,7 @@ prefs_filter_la_LDFLAGS = -module -no-undefined -avoid-version
 
 prefs_filter_la_LIBADD = \
 	$(GTK_LIBS) \
+	$(ONIG_LIBS) \
 	$(sylpheed_build_dir)/src/libsylpheed-plugin-0.la \
 	$(sylpheed_build_dir)/libsylph/libsylph-0.la
 
@@ -22,6 +23,7 @@ prefs_filter_CFLAGS = \
 
 prefs_filter_LDADD = \
 	$(GTK_LIBS) \
+	$(ONIG_LIBS) \
 	$(sylpheed_build_dir)/src/libsylpheed-plugin-0.la \
 	$(sylpheed_build_dir)/libsylph/libsylph-0.la
 
