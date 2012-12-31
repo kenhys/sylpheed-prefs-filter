@@ -518,8 +518,14 @@ static gboolean check_current_rule_polling(gpointer data)
 {
   gint queue_length;
   PrefsMatchedMail *matched;
-
+  regex_t regex;
+  gint regex_status;
+  gint filter_seq, n_filter;
+  PrefsFilterItem *filter_item;
+  
   SYLPF_START_FUNC;
+
+  reg_set_encoding(REG_POSIX_ENCODING_UTF8);
 
   queue_length = g_async_queue_length(queue);
   SYLPF_DEBUG_VAL("queue length", queue_length);
@@ -529,18 +535,46 @@ static gboolean check_current_rule_polling(gpointer data)
       SYLPF_DEBUG_PTR("queue item", matched);
       SYLPF_DEBUG_VAL("queue id", matched->id);
       SYLPF_DEBUG_VAL("queue total", matched->total);
-      if (matched->id < matched->total) {
-        gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(current_rule.progress),
-                                      (gdouble)matched->id/matched->total);
-      } else {
-        gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(current_rule.progress),
-                                      1.0);
-        g_thread_join(data);
-        return FALSE;
+
+      n_filter = g_list_length(filter_list);
+      if (n_filter <= 0) {
+        continue;
+      }
+      
+      for (filter_seq = 0; filter_seq < n_filter; filter_seq++) {
+        filter_item = (PrefsFilterItem*)g_list_nth_data(filter_item, filter_seq);
+        
+        if (!filter_item) {
+          continue;
+        }
+        
+        regex_status = regcomp(&regex,
+                               filter_item->filter,
+                               REG_ICASE |  REG_EXTENDED);
+
+        if (regex_status != 0) {
+          regfree(&regex);
+          continue;
+        }
+
+        regex_status = regexec(&regex, matched->msginfo->subject, 0, NULL, 0);
+
+        if (matched->id < matched->total) {
+          gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(current_rule.progress),
+                                        (gdouble)matched->id/matched->total);
+        } else {
+          gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(current_rule.progress),
+                                        1.0);
+          regfree(&regex);
+          g_thread_join(data);
+          return FALSE;
+        }
       }
     }
     queue_length--;
   }
+
+  regfree(&regex);
 
   SYLPF_END_FUNC;
 
