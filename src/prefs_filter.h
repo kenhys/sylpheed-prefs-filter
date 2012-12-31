@@ -38,9 +38,12 @@ typedef struct _PrefsCurrentRule
 {
   GtkWidget *dialog;
   GtkWidget *progress;
+  GtkWidget *store;
+  GtkWidget *tree;
   GtkWidget *inbox;
+  GtkWidget *name;
   GtkWidget *target;
-  GtkWidget *rule;
+  GtkWidget *filter;
   GtkWidget *folder;
 } PrefsCurrentRule;
 
