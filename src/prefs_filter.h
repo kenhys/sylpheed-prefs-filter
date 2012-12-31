@@ -41,7 +41,7 @@ typedef struct _PrefsFilterItem
   gchar *filter;
   gchar *folder;
   gboolean mkdir;
-};
+} PrefsFilterItem;
 
 typedef struct _PrefsCurrentRule
 {
