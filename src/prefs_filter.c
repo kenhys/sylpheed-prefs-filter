@@ -31,6 +31,8 @@ PrefsFilterOption SYLPF_OPTION;
 
 static PrefsCurrentRule current_rule;
 
+static GList *filter_list;
+
 void plugin_load(void)
 {
   GList *list, *cur;
@@ -39,6 +41,8 @@ void plugin_load(void)
 
   SYLPF_START_FUNC;
     
+  filter_list = NULL;
+
   sylpf_init_logger(SYLPF_ID,
                     G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION | G_LOG_LEVEL_MASK,
                     NULL,
