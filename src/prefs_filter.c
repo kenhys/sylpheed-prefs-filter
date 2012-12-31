@@ -40,6 +40,8 @@ static PrefsCurrentRule current_rule;
 
 static GList *filter_list;
 
+static GList *rule_list;
+
 void plugin_load(void)
 {
   GList *list, *cur;
