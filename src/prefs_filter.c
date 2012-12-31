@@ -8,7 +8,14 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
+#define USE_ONIGURUMA
+#define USE_ONIG_NATIVE
+
+#ifdef USE_ONIG_NATIVE
+#include <oniguruma.h>
+#else
 #include <onigposix.h>
+#endif
 
 #include "sylmain.h"
 #include "plugin.h"
@@ -518,14 +525,20 @@ static gboolean check_current_rule_polling(gpointer data)
 {
   gint queue_length;
   PrefsMatchedMail *matched;
-  regex_t regex;
+  regex_t *reg;
   gint regex_status;
   gint filter_seq, n_filter;
   PrefsFilterItem *filter_item;
-  
+  OnigErrorInfo onig_error;
+
   SYLPF_START_FUNC;
 
+#ifdef USE_ONIGURUMA
+#ifdef USE_ONIG_NATIVE
+#else
   reg_set_encoding(REG_POSIX_ENCODING_UTF8);
+#endif
+#endif
 
   queue_length = g_async_queue_length(queue);
   SYLPF_DEBUG_VAL("queue length", queue_length);
@@ -548,7 +561,17 @@ static gboolean check_current_rule_polling(gpointer data)
           continue;
         }
         
-        regex_status = regcomp(&regex,
+#ifdef USE_ONIGURUMA
+#ifdef USE_ONIG_NATIVE
+        regex_status = onig_new(&reg,
+                                filter_item->filter,
+                                strlen(filter_item->filter),
+                                ONIG_OPTION_DEFAULT,
+                                ONIG_ENCODING_UTF8,
+                                ONIG_SYNTAX_DEFAULT,
+                                &onig_error);
+#else
+        regex_status = regcomp(&reg,
                                filter_item->filter,
                                REG_ICASE |  REG_EXTENDED);
 
@@ -558,14 +581,20 @@ static gboolean check_current_rule_polling(gpointer data)
         }
 
         regex_status = regexec(&regex, matched->msginfo->subject, 0, NULL, 0);
-
+#endif
+#endif
         if (matched->id < matched->total) {
           gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(current_rule.progress),
                                         (gdouble)matched->id/matched->total);
         } else {
           gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(current_rule.progress),
                                         1.0);
+#ifdef USE_ONIGURUMA
+#ifdef USE_ONIG_NATIVE
+#else
           regfree(&regex);
+#endif
+#endif
           g_thread_join(data);
           return FALSE;
         }
@@ -574,7 +603,12 @@ static gboolean check_current_rule_polling(gpointer data)
     queue_length--;
   }
 
+#ifdef USE_ONIGURUMA
+#ifdef USE_ONIG_NATIVE
+#else
   regfree(&regex);
+#endif
+#endif
 
   SYLPF_END_FUNC;
 
