@@ -34,6 +34,15 @@ struct _PrefsFilterOption
   GtkWidget *create_folder;
 };
 
+typedef struct _PrefsFilterItem
+{
+  gchar *name;
+  gchar *source;
+  gchar *filter;
+  gchar *folder;
+  gboolean mkdir;
+};
+
 typedef struct _PrefsCurrentRule
 {
   GtkWidget *dialog;
