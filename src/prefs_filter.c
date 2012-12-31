@@ -341,6 +341,8 @@ static GtkWidget *create_filter_name_widget(void)
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), text, TRUE, TRUE, 0);
 
+  current_rule.name = text;
+
   return hbox;
 }
 
@@ -378,6 +380,9 @@ static GtkWidget *create_filter_rule_widget(void)
   gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbox), text, TRUE, TRUE, 0);
+
+  current_rule.target = combo;
+  current_rule.filter = text;
 
   SYLPF_END_FUNC;
 
@@ -434,6 +439,8 @@ static GtkWidget *create_filter_to_widget(void)
   g_signal_connect(folder, "clicked",
                    G_CALLBACK(prefs_filter_to_folder_cb), text);
   gtk_box_pack_start(GTK_BOX(hbox), folder, FALSE, FALSE, 0);
+
+  current_rule.folder = text;
 
   return hbox;
 }
@@ -600,7 +607,34 @@ static void check_current_rule_cb(GtkWidget *widget,
 static void add_current_rule_cb(GtkWidget *widget,
                                 gpointer data)
 {
+  PrefsCurrentRule *rule;
+  GtkTreeIter iter;
+  gchar *inbox;
+  gchar *name;
+  gchar *filter;
+  gchar *target;
+  gchar *folder;
+  gboolean mkdir_option;
+
   SYLPF_START_FUNC;
+
+  rule = (PrefsCurrentRule*)data;
+  g_return_if_fail(rule != NULL);
+  g_return_if_fail(rule->store != NULL);
+
+  name = gtk_entry_get_text(GTK_ENTRY(rule->name));
+  inbox = gtk_entry_get_text(GTK_ENTRY(rule->inbox));
+  filter = gtk_entry_get_text(GTK_ENTRY(rule->filter));
+  folder = gtk_entry_get_text(GTK_ENTRY(rule->folder));
+  
+  gtk_tree_store_append(rule->store, &iter, NULL);
+  gtk_tree_store_set(rule->store, &iter,
+                     RULE_MKDIR_COLUMN, mkdir_option,
+                     RULE_NAME_COLUMN, name,
+                     RULE_SRC_COLUMN, target,
+                     RULE_FILTER_COLUMN, filter,
+                     RULE_TO_COLUMN, folder,
+                     -1);
 
   SYLPF_END_FUNC;
 }
@@ -623,7 +657,7 @@ static GtkWidget *create_filter_edit_button_widget(void)
                    &current_rule);
   g_signal_connect(GTK_WIDGET(add_rule), "clicked",
                    G_CALLBACK(add_current_rule_cb),
-                   NULL);
+                   &current_rule);
 
   return hbox;
 }
@@ -740,6 +774,9 @@ static GtkWidget *create_rule_store_widget(void)
 
 
   gtk_box_pack_start(GTK_BOX(hbox), tree, TRUE, TRUE, 0);
+
+  current_rule.store = store;
+  current_rule.tree = tree;
 
   SYLPF_END_FUNC;
 
