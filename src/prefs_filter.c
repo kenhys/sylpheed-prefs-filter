@@ -8,6 +8,8 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
+#include <onigposix.h>
+
 #include "sylmain.h"
 #include "plugin.h"
 #include "folder.h"
