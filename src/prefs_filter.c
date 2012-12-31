@@ -500,7 +500,7 @@ static gpointer check_current_rule_thread(gpointer data)
       matched = g_new(PrefsMatchedMail, 1);
       matched->id = step + 1;
       matched->total = length;
-      matched->msginfo = msginfo;
+      matched->msginfo = minfo;
       g_async_queue_push(queue, (gpointer)matched);
     }
   }
