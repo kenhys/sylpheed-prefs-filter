@@ -476,6 +476,7 @@ static GAsyncQueue *queue;
 typedef struct _PrefsMatchedMail
 {
   guint id;
+  MsgInfo *msginfo;
   guint total;
 } PrefsMatchedMail;
 
@@ -499,6 +500,7 @@ static gpointer check_current_rule_thread(gpointer data)
       matched = g_new(PrefsMatchedMail, 1);
       matched->id = step + 1;
       matched->total = length;
+      matched->msginfo = msginfo;
       g_async_queue_push(queue, (gpointer)matched);
     }
   }
