@@ -51,6 +51,7 @@ void plugin_load(void)
   SYLPF_START_FUNC;
     
   filter_list = NULL;
+  rule_list = NULL;
 
   sylpf_init_logger(SYLPF_ID,
                     G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION | G_LOG_LEVEL_MASK,
