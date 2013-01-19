@@ -718,24 +718,36 @@ static void add_current_rule_cb(GtkWidget *widget,
   SYLPF_END_FUNC;
 }
 
+static void new_current_rule_cb(GtkWidget *widget,
+                                gpointer data)
+{
+  SYLPF_START_FUNC;
+  SYLPF_END_FUNC;
+}
 
 static GtkWidget *create_filter_edit_button_widget(void)
 {
   GtkWidget *hbox;
   GtkWidget *check_rule;
   GtkWidget *add_rule;
-
+  GtkWidget *new_rule;
+  
   hbox = gtk_hbox_new(FALSE, 0);
   add_rule = gtk_button_new_from_stock(GTK_STOCK_SAVE);
   check_rule = gtk_button_new_from_stock(GTK_STOCK_FIND);
+  new_rule = gtk_button_new_from_stock(GTK_STOCK_NEW);
   gtk_box_pack_end(GTK_BOX(hbox), add_rule, FALSE, FALSE, 0);
   gtk_box_pack_end(GTK_BOX(hbox), check_rule, FALSE, FALSE, 0);
+  gtk_box_pack_end(GTK_BOX(hbox), new_rule, FALSE, FALSE, 0);
 
   g_signal_connect(GTK_WIDGET(check_rule), "clicked",
                    G_CALLBACK(check_current_rule_cb),
                    &current_rule);
   g_signal_connect(GTK_WIDGET(add_rule), "clicked",
                    G_CALLBACK(add_current_rule_cb),
+                   &current_rule);
+  g_signal_connect(GTK_WIDGET(new_rule), "clicked",
+                   G_CALLBACK(new_current_rule_cb),
                    &current_rule);
 
   return hbox;
