@@ -1,12 +1,9 @@
 
 lib_LTLIBRARIES = prefs_filter.la
 
-sylpf_srcdir = $(sylpheed_build_dir)/plugin/sylplugin_factory/src
-
-
 prefs_filter_la_SOURCES = prefs_filter.c prefs_filter.h \
-	$(sylpf_srcdir)/sylplugin_factory.c \
-	$(sylpf_srcdir)/sylplugin_factory.h
+	$(sylplugin_factory_source_dir)/sylplugin_factory.c \
+	$(sylplugin_factory_source_dir)/sylplugin_factory.h
 prefs_filter_la_LDFLAGS = -module -no-undefined -avoid-version
 
 prefs_filter_la_LIBADD = \
@@ -28,8 +25,8 @@ prefs_filter_LDADD = \
 	$(sylpheed_build_dir)/libsylph/libsylph-0.la
 
 prefs_filter_SOURCES = \
-	$(sylpf_srcdir)/sylplugin_factory.c \
-	$(sylpf_srcdir)/sylplugin_factory.h \
+	$(sylplugin_factory_source_dir)/sylplugin_factory.c \
+	$(sylplugin_factory_source_dir)/sylplugin_factory.h \
 	prefs_filter.h \
 	prefs_filter.c \
 	prefs_filter_util.h \
@@ -41,7 +38,7 @@ INCLUDES = \
 	-I$(sylpheed_build_dir) \
 	-I$(sylpheed_build_dir)/libsylph \
 	-I$(sylpheed_build_dir)/src \
-	-I$(sylpf_srcdir)
+	-I$(sylplugin_factory_source_dir)/src
 
 
 install:
