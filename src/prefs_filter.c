@@ -678,8 +678,8 @@ static void add_current_rule_cb(GtkWidget *widget,
   filter = gtk_entry_get_text(GTK_ENTRY(rule->filter));
   folder = gtk_entry_get_text(GTK_ENTRY(rule->folder));
   
-  gtk_tree_store_append(rule->store, &iter, NULL);
-  gtk_tree_store_set(rule->store, &iter,
+  gtk_tree_store_append(GTK_TREE_STORE(rule->store), &iter, NULL);
+  gtk_tree_store_set(GTK_TREE_STORE(rule->store), &iter,
                      RULE_MKDIR_COLUMN, mkdir_option,
                      RULE_NAME_COLUMN, name,
                      RULE_SRC_COLUMN, target,
