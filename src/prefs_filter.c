@@ -184,7 +184,7 @@ static void prefs_filter_add_msg_cb(GObject *obj, FolderItem *item,
 static void prefs_filter_menu_ok_cb(GtkWidget *widget, gpointer data)
 {
   gsize sz;
-  gchar *buf;
+  const gchar *buf;
 
   SYLPF_START_FUNC;
 
@@ -660,11 +660,11 @@ static void add_current_rule_cb(GtkWidget *widget,
 {
   PrefsCurrentRule *rule;
   GtkTreeIter iter;
-  gchar *inbox;
-  gchar *name;
-  gchar *filter;
+  const gchar *inbox;
+  const gchar *name;
+  const gchar *filter;
   gchar *target;
-  gchar *folder;
+  const gchar *folder;
   gboolean mkdir_option;
 
   SYLPF_START_FUNC;
