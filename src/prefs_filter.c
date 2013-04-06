@@ -112,10 +112,8 @@ static void prefs_filter_menu_cb(void)
   /* show modal dialog */
   GtkWidget *window;
   GtkWidget *vbox;
-  GtkWidget *confirm_area;
-  GtkWidget *ok_btn;
-  GtkWidget *cancel_btn;
-    
+  GtkWidget *notebook;
+
   SYLPF_START_FUNC;
 
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -222,19 +220,13 @@ static GtkWidget *create_config_main_page(GtkWidget *notebook, GKeyFile *pkey)
 {
 
   GtkWidget *vbox;
-  GtkWidget *hbox;
-  GtkWidget *startup_align;
   GtkWidget *label;
-  GtkWidget *filter_label;
   GtkWidget *filter_name_widget;
   GtkWidget *filter_rule_widget;
   GtkWidget *filter_to_widget;
   GtkWidget *create_folder_widget;
   GtkWidget *filter_editing_button_widget;
   GtkWidget *filter_manage_button_widget;
-  GtkWidget *filter_exec;
-  GtkWidget *filter_save;
-  GtkWidget *filter_save_folder;
   GtkWidget *inbox_frame;
   GtkWidget *inbox_widget;
   GtkWidget *edit_frame;
@@ -390,7 +382,6 @@ static GtkWidget *create_filter_rule_widget(void)
 
 static void inbox_folder_identifier_cb(GObject *obj, gpointer data)
 {
-  gchar *dir_name = NULL;
   gchar *identifier;
   FolderItem *dest_item;
   dest_item = syl_plugin_folder_sel(NULL,
@@ -407,8 +398,6 @@ static void inbox_folder_identifier_cb(GObject *obj, gpointer data)
 
 static void prefs_filter_to_folder_cb(GObject *obj, gpointer data)
 {
-  gchar *dir_name = NULL;
-  GtkWidget *dialog;
   FolderItem *dest_item;
   dest_item = syl_plugin_folder_sel(NULL,
                                     FOLDER_SEL_COPY,
