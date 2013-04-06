@@ -128,7 +128,7 @@ static void prefs_filter_menu_cb(void)
   gtk_container_add(GTK_CONTAINER(window), vbox);
 
   /* notebook */
-  GtkWidget *notebook = gtk_notebook_new();
+  notebook = gtk_notebook_new();
   /* main tab */
   create_config_main_page(notebook, SYLPF_OPTION.rcfile);
   /* about, copyright tab */
@@ -449,9 +449,9 @@ static GtkWidget *create_folder_option_widget(void)
 static void check_current_rule_cancel_cb(GtkWidget *widget,
                                          gpointer data)
 {
-  SYLPF_START_FUNC;
-
   PrefsCurrentRule *current;
+
+  SYLPF_START_FUNC;
 
   current = (PrefsCurrentRule*)data;
   gtk_widget_destroy(current->dialog);
@@ -470,13 +470,13 @@ typedef struct _PrefsMatchedMail
 
 static gpointer check_current_rule_thread(gpointer data)
 {
-  SYLPF_START_FUNC;
-
   PrefsMatchedMail *matched;
   gint step = 0;
   guint length = 0;
   GSList *mlist;
   MsgInfo *minfo;
+
+  SYLPF_START_FUNC;
 
   mlist = (GSList*)data;
   if (mlist) {
