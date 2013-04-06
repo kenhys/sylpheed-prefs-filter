@@ -44,10 +44,6 @@ static GList *rule_list;
 
 void plugin_load(void)
 {
-  GList *list, *cur;
-  const gchar *ver;
-  gpointer mainwin;
-
   SYLPF_START_FUNC;
     
   filter_list = NULL;
@@ -110,12 +106,6 @@ static void init_done_cb(GObject *obj, gpointer data)
   SYLPF_END_FUNC;
 }
 
-static void app_exit_cb(GObject *obj, gpointer data)
-{
-  SYLPF_START_FUNC;
-  SYLPF_END_FUNC;
-}
-
 static void prefs_filter_menu_cb(void)
 {
 
@@ -158,13 +148,6 @@ static void prefs_filter_menu_cb(void)
                        _("Prefs filter settings [prefs_filter]"));
   gtk_widget_show(window);
 
-  SYLPF_END_FUNC;
-}
-
-static void folderview_menu_popup_cb(GObject *obj, GtkItemFactory *ifactory,
-				     gpointer data)
-{
-  SYLPF_START_FUNC;
   SYLPF_END_FUNC;
 }
 
