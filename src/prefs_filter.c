@@ -29,7 +29,7 @@
 
 static SylPluginInfo info = {
   PLUGIN_NAME,
-  "0.1.0",
+  VERSION,
   "HAYASHI Kentaro",
   PLUGIN_DESC
 };
