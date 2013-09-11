@@ -10,6 +10,10 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
 
+AC_DEFINE([SYLPF_ID], ["prefs_filter"], [""])
+AC_DEFINE([SYLPF_OPTION], [prefs_filter_option], [""])
+
+
 # Checks for programs.
 AC_PROG_AWK
 AC_PROG_CC
