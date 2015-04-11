@@ -1,7 +1,7 @@
 
 lib_LTLIBRARIES = prefs_filter.la
 
-prefs_filter_la_SOURCES = prefs_filter.c prefs_filter.h \
+prefs_filter_la_SOURCES = prefs_filter.c prefs_filter.h
 prefs_filter_la_LDFLAGS = -module -no-undefined -avoid-version
 
 prefs_filter_la_LIBADD = \
