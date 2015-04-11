@@ -8,7 +8,8 @@ prefs_filter_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(ONIG_LIBS) \
 	$(sylpheed_build_dir)/src/libsylpheed-plugin-0.la \
-	$(sylpheed_build_dir)/libsylph/libsylph-0.la
+	$(sylpheed_build_dir)/libsylph/libsylph-0.la \
+	$(SYLPF_LIBS)
 
 bin_PROGRAMS = sylprefs-filter
 
@@ -34,7 +35,8 @@ AM_CPPFLAGS = \
 	-I$(sylpheed_build_dir) \
 	-I$(sylpheed_build_dir)/libsylph \
 	-I$(sylpheed_build_dir)/src \
-	-I$(sylplugin_factory_source_dir)/src
+	-I$(sylplugin_factory_source_dir)/src \
+	$(SYLPF_CFLAGS)
 
 
 install:
