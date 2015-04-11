@@ -32,10 +32,10 @@ AM_GLIB_GNU_GETTEXT
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
-ONIG_CFLAGS=`onig-config --cflags`
-ONIG_LIBS=`onig-config --libs`
-AC_SUBST(ONIG_CFLAGS)
-AC_SUBST(ONIG_LIBS)
+PKG_CHECK_MODULES([GLIB], [glib-2.0])
+PKG_CHECK_MODULES([GTK], [gtk+-2.0])
+PKG_CHECK_MODULES([ONIG], [oniguruma])
+PKG_CHECK_MODULES([SYLPF], [sylplugin-factory])
 
 # Checks for header files.
 
