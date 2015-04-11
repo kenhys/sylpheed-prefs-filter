@@ -10,13 +10,18 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
 
+AC_DEFINE([SYLPF_ID], ["prefs_filter"], [""])
+AC_DEFINE([SYLPF_OPTION], [prefs_filter_option], [""])
+
+
 # Checks for programs.
 AC_PROG_AWK
 AC_PROG_CC
 AC_PROG_MAKE_SET
 AC_PROG_LIBTOOL
 
-m4_include(../sylplugin_factory/m4/sylplugin_factory.m4)
+m4_include(lib/sylplugin_factory/m4/compiler_flag.m4)
+m4_include(lib/sylplugin_factory/m4/sylplugin_factory.m4)
 
 # Checks for libraries.
 AM_PATH_GLIB_2_0(2.8.0,, AC_MSG_ERROR(Test for GLib failed. See the 'INSTALL' for help.))
@@ -25,9 +30,13 @@ GETTEXT_PACKAGE=sylnotify
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Define text domain.])
 AM_GLIB_GNU_GETTEXT
-
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
+
+ONIG_CFLAGS=`onig-config --cflags`
+ONIG_LIBS=`onig-config --libs`
+AC_SUBST(ONIG_CFLAGS)
+AC_SUBST(ONIG_LIBS)
 
 # Checks for header files.
 
