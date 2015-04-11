@@ -16,7 +16,6 @@ env:
 before_script:
   - curl --location https://raw.github.com/kenhys/sylpheed-plugin-factory/master/misc/setup-travis.sh | sh
   - sudo apt-get install -qq libonig-dev
-  - git submodule update --init --recursive
   - ./autogen.sh
 script:
   - ./configure --with-sylpheed-build-dir=`pwd`/sylpheed
