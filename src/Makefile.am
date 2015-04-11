@@ -20,8 +20,7 @@ sylprefs_filter_CFLAGS = \
 sylprefs_filter_LDADD = \
 	$(GTK_LIBS) \
 	$(ONIG_LIBS) \
-	$(sylpheed_build_dir)/src/libsylpheed-plugin-0.la \
-	$(sylpheed_build_dir)/libsylph/libsylph-0.la
+	$(SYLPHEED_LIBS)
 
 sylprefs_filter_SOURCES = \
 	prefs_filter.h \
