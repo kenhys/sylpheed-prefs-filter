@@ -8,7 +8,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
+AM_INIT_AUTOMAKE([foreign])
 
 AC_DEFINE([SYLPF_ID], ["prefs_filter"], [""])
 AC_DEFINE([SYLPF_OPTION], [prefs_filter_option], [""])
