@@ -32,7 +32,7 @@ prefs_filter_SOURCES = \
 	prefs_filter_util.h \
 	prefs_filter_util.c
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	$(GTK_CFLAGS) \
 	-I$(includedir) \
 	-I$(sylpheed_build_dir) \
