@@ -34,8 +34,20 @@ AC_SUBST(GTK_LIBS)
 
 PKG_CHECK_MODULES([GLIB], [glib-2.0])
 PKG_CHECK_MODULES([GTK], [gtk+-2.0])
-PKG_CHECK_MODULES([ONIG], [oniguruma])
 PKG_CHECK_MODULES([SYLPF], [sylplugin-factory])
+PKG_CHECK_MODULES([ONIG],
+		  [oniguruma],
+		  [oniguruma_exists=yes],
+		  [oniguruma_exists=no])
+if test "$oniguruma_exists" = "no"; then
+  AC_CHECK_PROG(ONIG_CONFIG, onig-config, onig-config)
+  if test "$ONIG_CONFIG" = "onig-config"; then
+     ONIG_CFLAGS=`onig-config --cflags`
+     ONIG_LIBS=`onig-config --libs`
+     AC_SUBST(ONIG_CFLAGS)
+     AC_SUBST(ONIG_LIBS)
+  fi
+fi
 
 # Checks for header files.
 
